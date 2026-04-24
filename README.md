@@ -66,7 +66,8 @@ Do **not** edit files inside `~/.claude/skills/<skill>/` directly — those edit
 
 | Skill | Description |
 |---|---|
-| [triage-pr-comments](./triage-pr-comments/SKILL.md) | Triage review comments (CodeRabbit, reviewers) on the current branch's open PR. Classifies each comment into one of five states (valid-fix / partial / invalid / defer / needs-info), asks clarifying questions when ambiguous, and gates commit/push/reply on explicit user approval. |
+| [pr-review-status](./pr-review-status/SKILL.md) | Read-only overview of the current branch's PR review comments — groups into addressed / pending / in-discussion / deferred. No edits, no posts. Pair with `triage-pr-comments` when you want to act on what you see. |
+| [triage-pr-comments](./triage-pr-comments/SKILL.md) | Active triage workflow: classifies each comment into one of five states (valid-fix / partial / invalid / defer / needs-info), asks clarifying questions when ambiguous, implements approved fixes, and gates commit/push/reply on explicit user approval. |
 
 ## Adding a new skill
 

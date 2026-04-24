@@ -1,11 +1,13 @@
 ---
 name: triage-pr-comments
-description: Triage review comments (CodeRabbit, reviewers) on the current branch's open PR. Verifies each claim against the actual code, classifies into explicit states, reports validity + priority, asks for clarification when needed, and only commits/pushes/replies on explicit user approval. Use when user says "triage the PR comments", "check coderabbit comments", "address review feedback", "show PR review status", or wants a grounded assessment of review feedback before acting.
+description: Triage review comments (CodeRabbit, reviewers) on the current branch's open PR. Verifies each claim against the actual code, classifies into explicit states, reports validity + priority, asks for clarification when needed, and only commits/pushes/replies on explicit user approval. Use when user says "triage the PR comments", "check coderabbit comments", "address review feedback", or wants a grounded assessment of review feedback before acting. For a read-only overview of where things stand (no edits, no posts), use `pr-review-status` first.
 ---
 
 # Triage PR Comments
 
 Go through review comments on the open PR for the current branch, verify each against the actual code (don't trust the reviewer blindly), classify them into explicit states, fix the valid ones, and post responses. Works for CodeRabbit, humans, or any reviewer.
+
+For a read-only "where are we?" view before acting, use the `pr-review-status` skill — this skill is the active, destructive counterpart (edits code, posts replies, commits, pushes).
 
 ## Prerequisites
 
@@ -26,35 +28,7 @@ Every comment gets classified into exactly one state. The state drives what happ
 
 **One state per comment.** If you're torn, pick the more conservative (e.g. `needs-info` over guessing `invalid`).
 
-## Main workflows
-
-The skill has two entry points — pick based on the user's ask.
-
-### Workflow A: Fresh triage (default)
-
-Use when the user says "triage the PR comments", "address CodeRabbit", or otherwise starts from a cold PR.
-
-Runs steps 1 → 9 below.
-
-### Workflow B: Status overview
-
-Use when the user says "show PR review status", "where are we on the review", or comes back to a long-running PR.
-
-Query the PR comments and figure out what state each is already in, based on:
-- Has the comment been addressed by a commit on this branch? (look for replies from you/the user referencing a SHA)
-- Is there a reply thread indicating deferral, invalidation, or ongoing discussion?
-- Is the comment untouched?
-
-Present a grouped summary:
-
-- **Addressed** (replied with a SHA) — N comments
-- **Pending** (no reply) — N comments
-- **In discussion** (reply exists but no resolution SHA) — N comments
-- **Deferred / Dismissed** (logged in `.pr-review-decisions/`) — N comments
-
-Then let the user pick one to dive into, or restart fresh triage on the pending ones.
-
-## Workflow A steps
+## Workflow
 
 ### 1. Find the PR
 
