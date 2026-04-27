@@ -132,7 +132,9 @@ uninstall_one() {
 }
 
 if [[ ${#targets[@]} -eq 0 ]]; then
-  mapfile -t targets < <(list_repo_skills)
+  while IFS= read -r name; do
+    targets+=("$name")
+  done < <(list_repo_skills)
 fi
 
 if [[ ${#targets[@]} -eq 0 ]]; then
