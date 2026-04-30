@@ -23,7 +23,7 @@ Every comment gets classified into exactly one state. The state drives what happ
 | `valid-fix`    | Real issue, fix belongs in this PR                                        | Implement the fix (step 5), reply with SHA after push                 |
 | `partial`      | Real concern but already mitigated elsewhere or lower-impact than claimed | No code change; reply explaining the existing mitigation              |
 | `invalid`      | Based on misread of the code, stale info, or doesn't apply                | Draft a respectful rebuttal; user decides whether to post or dismiss  |
-| `defer`        | Valid but out of scope for this PR                                        | Reply acknowledging + linking a follow-up issue; log in knowledge base |
+| `defer`        | Valid but out of scope for this PR                                        | Reply acknowledging + linking a follow-up issue                       |
 | `needs-info`   | Ambiguous or overlapping with another comment — can't triage yet          | Ask the user a clarifying question before moving the comment forward  |
 
 **One state per comment.** If you're torn, pick the more conservative (e.g. `needs-info` over guessing `invalid`).
@@ -131,19 +131,25 @@ Ask before pushing ("want me to push?"). Only push when the user confirms. Use `
 
 If `git push` is blocked by a hook, surface the block and ask the user whether to adjust the hook or push manually. Do not try to work around the block.
 
-### 8. Draft reply comments — show drafts first
+### 8. Draft reply comments — never auto-post
+
+**Hard rule: every reply requires explicit user approval before posting. No exceptions.** This includes "obviously fine" `valid-fix` acknowledgments, replies the user dictated verbatim earlier in the conversation, and any follow-up replies after a code change. The user gets the final say on every word that lands on the PR.
+
+"Earlier approval" is not transferable — if the user approved one reply and the code later changed, draft the new reply and re-confirm before posting it. Replies are public and can shape the reviewer relationship; treat them like sending an email under the user's name.
 
 Draft a reply for every triaged comment, shaped by its state:
 
 - **`valid-fix`** → Reference the fix commit short SHA. Describe what was done, name specific state/variable/function names so a future reader can find the change. Don't re-argue the claim.
 - **`partial`** → Acknowledge the concern, explain where/why it's already mitigated (file:line if possible), no SHA needed.
 - **`invalid`** → Respectfully disagree. Point to the code that shows why the claim doesn't apply. Keep it neutral — reviewers (especially bots) can be wrong, and that's fine. Flag to the user as "draft rebuttal" before posting.
-- **`defer`** → Acknowledge the issue is real but out of scope. Link to a follow-up issue if one exists; otherwise say one will be filed. Log the decision in `.pr-review-decisions/` (see step 10).
+- **`defer`** → Acknowledge the issue is real but out of scope. Link to a follow-up issue if one exists; otherwise say one will be filed.
 - **`needs-info`** should not reach this step — resolve it in 3a first.
 
-Show all drafts to the user at once. Wait for approval or edits before posting. For `invalid` replies, explicitly confirm — they carry more weight than a "fixed" reply.
+Show **all** drafts to the user in one message — full text of each, grouped by comment, so they can compare and edit holistically. Then stop and wait for explicit approval ("post them", "ship it", or per-reply edits). Do not interpret silence, agreement on a different topic, or general project approval as authorization to post.
 
-### 9. Post replies via the replies endpoint
+### 9. Post replies — only after explicit approval
+
+Only after the user has explicitly approved (per the hard rule in step 8), post via the dedicated replies endpoint.
 
 **Gotcha:** `POST /pulls/<num>/comments` with `in_reply_to` in the body **does not work** via `gh api -f` because `-f` stringifies and the API rejects the string. Use the dedicated replies endpoint instead:
 
@@ -156,33 +162,11 @@ EOF
 )" --jq '.id'
 ```
 
-Post all replies in parallel (multiple Bash calls in one message). Report the reply IDs back to the user.
-
-### 10. Log deferred / dismissed decisions
-
-For any comment in state `defer` or `invalid`, append a short record to `.pr-review-decisions/<pr-number>.md` in the current repo. Create the directory if it doesn't exist.
-
-Format:
-
-```markdown
-## PR #<num> — <comment path>:<line>
-
-- **State:** defer | invalid
-- **Reviewer:** <login>
-- **Comment URL:** <html_url from the API>
-- **Claim:** <one-line summary of what they said>
-- **Decision:** <why we deferred or rejected, in plain language>
-- **Follow-up issue:** <URL if defer + issue filed, else "none">
-- **Date:** <YYYY-MM-DD>
-```
-
-The file is a flat log — keep the newest entry at the top. This gives a searchable record of "we keep seeing this class of nit and rejecting it" which is useful for pattern detection over time.
-
-Stage and commit `.pr-review-decisions/` in the same commit as the fixes, or a follow-up commit if fixes already shipped.
+Post all approved replies in parallel (multiple Bash calls in one message). Report the reply IDs back to the user.
 
 ## Notes
 
-- Don't post `invalid` replies without discussing with the user first — disagreeing with a reviewer is a social move, not a code move.
+- The "draft, never auto-post" rule in step 8 is the most important rule in this skill. If you're unsure whether a reply was approved, it wasn't — go back and ask.
 - If the PR repo moved (GitHub redirects during push), the old `owner/repo` in git remote still works for `gh api`, but prefer the new location when constructing URLs.
 - CodeRabbit comments include a lot of collapsed `<details>` blocks — the meaningful claim is usually in the first paragraph. Skim the rest only if you need the suggested diff.
 - If a reviewer pushes back on a reply you posted, re-triage the comment from scratch. States aren't permanent — a `valid-fix` reply can still get disputed.
