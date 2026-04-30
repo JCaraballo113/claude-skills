@@ -67,6 +67,7 @@ Do **not** edit files inside `~/.claude/skills/<skill>/` directly — those edit
 | Skill | Description |
 |---|---|
 | [add-agent-skill](./add-agent-skill/SKILL.md) | Scaffold a new agent skill in this repo. Interviews for name and triggers, writes the frontmatter + outline, installs locally, and suggests a commit. Use when starting a new skill. Named `agent-skill` to avoid collision with a potential future Anthropic-shipped `add-skill`. |
+| [open-pr](./open-pr/SKILL.md) | Open a reviewer-oriented pull request from the current branch. Reads diff and commits, interrogates the author one question at a time (intent, type, scope, risk, out-of-scope, ticket), builds a What / Why / Notes-for-reviewers body inline, then pushes and opens via `gh` as a draft by default. Honors any repo PR template. |
 | [pr-review-status](./pr-review-status/SKILL.md) | Read-only overview of the current branch's PR review comments — groups into addressed / pending / in-discussion / deferred. No edits, no posts. Pair with `triage-pr-comments` when you want to act on what you see. |
 | [triage-pr-comments](./triage-pr-comments/SKILL.md) | Active triage workflow: classifies each comment into one of five states (valid-fix / partial / invalid / defer / needs-info), asks clarifying questions when ambiguous, implements approved fixes, and gates commit/push/reply on explicit user approval. |
 
