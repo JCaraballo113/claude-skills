@@ -77,8 +77,10 @@ Same three-layer structure as the Obsidian template, minus YAML frontmatter (Not
 - [ ] What it impacts downstream
 
 ## Notes
+_Jot the non-obvious in my own voice — insights, gotchas, the numbers that tripped me up. Terse, not prose._
 
 ## Gaps found
+_What I got wrong and the fix — short, blunt, first person._
 ```
 
 Flip `status: learning` → `mastered` in the quote line and re-push when done. Cross-page links use Notion @-mentions or the page URL rather than `[[wikilinks]]`.

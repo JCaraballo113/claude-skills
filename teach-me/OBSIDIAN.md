@@ -70,10 +70,10 @@ source: "<commits · files · ADRs this grounds in>"
 - [ ] What it impacts downstream
 
 ## Notes
-_Explanations, code refs (`file:line`), the whys beneath the whys._
+_Jot the non-obvious in my own voice — insights, gotchas, the numbers that tripped me up. Terse, not prose._
 
 ## Gaps found
-_Misconceptions surfaced by restating/quizzing, and whether they're now closed._
+_What I got wrong and the fix — short, blunt, first person._
 ```
 
 ## Project index (MOC)

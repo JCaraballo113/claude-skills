@@ -31,7 +31,7 @@ If notes are on, create the note now and use it as the running checklist (see th
 2. **The solution** — what was done, why it was resolved that way, the design decisions, the edge cases.
 3. **The broader context** — why this matters, what the change impacts downstream.
 
-The note's markdown is the working copy of the checklist; persist it to the backend at each checkpoint (after an item is mastered) — write the file (Obsidian) or rewrite the page (Notion).
+The note's markdown is the working copy of the checklist; persist it to the backend at each checkpoint (after an item is mastered) — write the file (Obsidian) or rewrite the page (Notion). Write it in my voice — terse, personal study notes, not AI prose (see "Write the note in the learner's voice" below).
 
 ## Step 3 — Teach, one item at a time
 
@@ -83,6 +83,17 @@ Marking an item done because "we talked about it" defeats the purpose. Check it 
 ## Visual aids
 
 Default to mermaid diagrams embedded in the note (they render in both Obsidian and Notion and stay with the note). Escalate to a standalone interactive HTML explainer for complex/visual topics or on request. Details and the quality bar are in [VISUALS.md](./VISUALS.md).
+
+## Write the note in the learner's voice, not AI prose
+
+The note is my personal study record, not documentation — it should read like I scribbled it, not like a generated explainer. The default AI register (polished, exhaustive, every bullet parallel, em-dash-heavy, hedged) is exactly wrong here.
+
+- Terse and telegraphic — fragments, arrows (`→`), shorthand. Don't write a tidy full sentence where a phrase does.
+- Capture the non-obvious — the insight, the gotcha, the mistake I made and the fix. Skip anything obvious or already plain in the code.
+- Plain and direct — no filler ("it's worth noting", "importantly", "in essence"), no hedging, no grand framing.
+- Personal where it's natural — "kept thinking X, turns out Y", "gotcha: …", "TIL …".
+- Uneven by design — a lot where it was hard, a line or nothing where it was easy. Even, uniform structure is itself an AI tell.
+- Concrete over generic — real numbers, `file:line`, the actual edge case; never restate the heading.
 
 ## Quizzing rules
 
