@@ -38,6 +38,7 @@ Ask these up front (AskUserQuestion works well); don't guess:
 | Validation | Zod (single source of truth, shared client/server) | Zod | Zod (`@hono/zod-validator`) |
 | Styling | Tailwind + shadcn | Tailwind + shadcn | — |
 | ORM/DB | Drizzle + Docker/Supabase Postgres | (via its API) | Drizzle + Docker/Supabase Postgres |
+| Design | Pencil + impeccable | Pencil + impeccable | — |
 | Tests | Vitest | Vitest | Vitest |
 | Lint | guardrail ESLint | guardrail ESLint | guardrail ESLint |
 | CI | GitHub Actions | GitHub Actions | GitHub Actions |
@@ -189,7 +190,23 @@ branches and PRs to main — `pnpm/action-setup` + `setup-node` with
 `supabase/postgres` service on the same port the compose file uses, with a
 `pg_isready` healthcheck.
 
-## Step 7 — Agent workflow conventions (if available)
+## Step 7 — Design tooling (frontend projects)
+
+UI is **always designed in Pencil** (a `.pen` design file driven through
+the Pencil MCP — never Read/Grep on `.pen` files) with the **`impeccable`**
+skill governing design quality. Design first, implement second. Setup:
+
+- Create the project's `.pen` file under `designs/` and reference it from
+  the agent instructions.
+- Run `impeccable init` (or note it as the next step) so PRODUCT.md /
+  DESIGN.md capture the product context the design work anchors to.
+- Encode the convention in AGENTS.md / CLAUDE.md: designs live in
+  `designs/<app>.pen` via the Pencil MCP; `/impeccable` governs design
+  quality; design precedes implementation.
+
+Skip this step entirely for backend/API projects.
+
+## Step 8 — Agent workflow conventions (if available)
 
 If the `setup-matt-pocock-skills` skill is installed, invoke it now to
 layer the agent-workflow conventions (issue tracker, triage labels, domain
@@ -199,7 +216,7 @@ it's usually installed globally (`~/.claude/skills/`), with
 covers both, so trust it over guessing paths. If it isn't installed in
 either scope, skip silently — don't hunt for it.
 
-## Step 8 — Report
+## Step 9 — Report
 
 Summarize what was installed and why (tied back to the interview answers),
 list the scripts, and call out anything deferred (auth, deployment target,
