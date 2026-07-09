@@ -194,7 +194,18 @@ branches and PRs to main — `pnpm/action-setup` + `setup-node` with
 
 UI is **always designed in Pencil** (a `.pen` design file driven through
 the Pencil MCP — never Read/Grep on `.pen` files) with the **`impeccable`**
-skill governing design quality. Design first, implement second. Setup:
+skill governing design quality. Design first, implement second.
+
+Check availability first, and prompt the user to install whatever is
+missing (don't install these silently):
+
+- `impeccable` not in the available-skills list → offer:
+  `npx skills add pbakaus/impeccable`
+- Pencil MCP tools not connected → point the user at
+  <https://www.pencil.dev/> to install the Pencil editor + MCP, then
+  reconnect the session.
+
+Once both are present:
 
 - Create the project's `.pen` file under `designs/` and reference it from
   the agent instructions.
