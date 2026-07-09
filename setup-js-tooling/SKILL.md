@@ -191,10 +191,13 @@ branches and PRs to main — `pnpm/action-setup` + `setup-node` with
 
 ## Step 7 — Agent workflow conventions (if available)
 
-If the `setup-matt-pocock-skills` skill is installed (check the available
-skills list — never guess), invoke it now to layer the agent-workflow
-conventions (issue tracker, triage labels, domain docs) on top of the
-fresh tooling. If it isn't installed, skip silently — don't hunt for it.
+If the `setup-matt-pocock-skills` skill is installed, invoke it now to
+layer the agent-workflow conventions (issue tracker, triage labels, domain
+docs) on top of the fresh tooling. Check **global first, then project** —
+it's usually installed globally (`~/.claude/skills/`), with
+`.claude/skills/` in the repo as the fallback; the available-skills list
+covers both, so trust it over guessing paths. If it isn't installed in
+either scope, skip silently — don't hunt for it.
 
 ## Step 8 — Report
 
