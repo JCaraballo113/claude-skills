@@ -189,7 +189,14 @@ branches and PRs to main — `pnpm/action-setup` + `setup-node` with
 `supabase/postgres` service on the same port the compose file uses, with a
 `pg_isready` healthcheck.
 
-## Step 7 — Report
+## Step 7 — Agent workflow conventions (if available)
+
+If the `setup-matt-pocock-skills` skill is installed (check the available
+skills list — never guess), invoke it now to layer the agent-workflow
+conventions (issue tracker, triage labels, domain docs) on top of the
+fresh tooling. If it isn't installed, skip silently — don't hunt for it.
+
+## Step 8 — Report
 
 Summarize what was installed and why (tied back to the interview answers),
 list the scripts, and call out anything deferred (auth, deployment target,
