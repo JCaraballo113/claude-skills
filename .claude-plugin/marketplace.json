@@ -7,7 +7,7 @@
   },
   "plugins": [
     {
-      "name": "claude-skills",
+      "name": "john-superpowers",
       "source": "./",
       "description": "Personal collection of Claude Code skills — PR workflows, JS/TS bootstrap, teaching sessions, UX bridging, and HTML artifacts."
     }

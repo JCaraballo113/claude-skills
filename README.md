@@ -8,7 +8,7 @@ Inside Claude Code:
 
 ```
 /plugin marketplace add JCaraballo113/claude-skills
-/plugin install claude-skills@jcaraballo
+/plugin install john-superpowers@jcaraballo
 ```
 
 ### Local development install
@@ -17,7 +17,7 @@ On a machine where this repo is cloned and you want edits picked up without push
 
 ```
 /plugin marketplace add ~/Documents/repos/claude-skills
-/plugin install claude-skills@jcaraballo
+/plugin install john-superpowers@jcaraballo
 ```
 
 ## Updating
@@ -34,12 +34,12 @@ After pulling (or pushing from another machine):
 ## Uninstall
 
 ```
-/plugin uninstall claude-skills@jcaraballo
+/plugin uninstall john-superpowers@jcaraballo
 ```
 
 ## Skills
 
-Skills live under [`skills/`](./skills). Once the plugin is installed they're invoked as `/claude-skills:<name>`, and Claude also auto-invokes them from their descriptions.
+Skills live under [`skills/`](./skills). Once the plugin is installed they're invoked as `/john-superpowers:<name>`, and Claude also auto-invokes them from their descriptions.
 
 | Skill | Description |
 |---|---|
