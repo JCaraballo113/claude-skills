@@ -144,6 +144,73 @@ Scoped exemptions (separate flat-config blocks):
   Comments stay banned; test names carry intent.
 - **Root `*.config.*` files**: comments allowed, everything else applies.
 
+### Protect the config with a hook
+
+The caps only hold if the agent can't quietly rewrite them. Install a
+PreToolUse hook that denies Edit/Write on the ESLint config. Install it
+**last** — after the config has reached its final shape (fresh scaffold
+done, or remediation finished), or the hook blocks the setup itself.
+Requires `jq` on the machine.
+
+`.claude/hooks/protect-eslint.sh` (then `chmod +x` it):
+
+```bash
+#!/bin/bash
+INPUT=$(cat)
+FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // ""')
+FILENAME=$(basename "$FILE_PATH")
+
+if [[ "$FILENAME" == eslint.config.* ]]; then
+  jq -n '{
+    hookSpecificOutput: {
+      hookEventName: "PreToolUse",
+      permissionDecision: "deny",
+      permissionDecisionReason: "Modifying the ESLint config is forbidden. If you believe a rule makes your task impossible, report this to the user and explain why."
+    }
+  }'
+  exit 0
+fi
+exit 0
+```
+
+Register it in the project's **committed** `.claude/settings.json` (merge
+into the existing file if there is one) so the guardrail ships with the
+repo:
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/protect-eslint.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Why this exact shape:
+
+- **Silent fallthrough on non-matches — never emit `{"decision":
+  "approve"}`.** On PreToolUse, `approve` bypasses the permission prompt
+  for the matched tool call, so an approve-by-default hook silently
+  auto-approves every Edit/Write in the repo. No output means "no
+  opinion" and normal permissions apply.
+- **`permissionDecision: "deny"`** is the current PreToolUse output
+  format; bare `decision: "block"` is its deprecated spelling.
+- **`eslint.config.*`** covers `.js`/`.mjs`/`.ts` flat configs.
+- The deny reason is fed back to the agent, so it names the escalation
+  path (report to the user) instead of dead-ending.
+- The hook guards Edit/Write only — a `sed` rewrite via Bash still gets
+  through. It's a tripwire, not a sandbox; `docs/agents/linting.md`
+  stays the instruction of record.
+
 ### Remediating an existing codebase
 
 On a fresh scaffold there is nothing to fix. On an existing repo:
@@ -171,8 +238,10 @@ On a fresh scaffold there is nothing to fix. On an existing repo:
 5. Run the test suite after each batch; runtime-verify UI at the end if
    components were restructured.
 6. Write `docs/agents/linting.md` (rules table, deviations, exemptions,
-   where explanations go) and point AGENTS.md / CLAUDE.md at it with the
-   one-liner: "When a cap fires, extract — never raise the cap."
+   where explanations go, the protect-eslint hook) and point AGENTS.md /
+   CLAUDE.md at it with the one-liner: "When a cap fires, extract — never
+   raise the cap." Then install the protect hook (see above) as the final
+   lint action.
 
 Gotchas: `detectObjects: false` already spares `{ status: 409 }`-style
 object literals — only bare arguments/operands need constants (HTTP
