@@ -286,7 +286,41 @@ Once both are present:
 
 Skip this step entirely for backend/API projects.
 
-## Step 8 — Agent workflow conventions (if available)
+## Step 8 — Agent rules (`.claude/rules/`)
+
+Encode the working conventions as one rule file per concern in
+`.claude/rules/` — checked in, loaded as project instructions every
+session. Write them generalized to the project at hand (its actual
+domains and scripts), never with another app's specifics:
+
+- **`testing.md`** (every project): every Vitest file groups specs under
+  `describe("Happy path")` and `describe("Negative path")`; when one file
+  covers several surfaces, nest the pair inside each surface's describe.
+  Happy path = the documented, intended behavior. Negative path =
+  everything that must fail well (auth rejections, validation errors,
+  conflicts, malformed data, downstream failures), asserting the
+  observable refusal — status, unchanged state, audit entry — not
+  internals. A surface with no negative specs is a smell. Spec files
+  mirror the domain seams of the source: group into `tests/<domain>/`
+  folders as domains accumulate — never one flat pile; a lone spec may
+  sit flat until its domain grows a second file. Shared infrastructure
+  lives in `tests/helpers/`.
+- **`migrations.md`** (only when the project has a DB): local dev is
+  push-based (`db:push`); deployed environments are migration-based.
+  `db:generate` once the shape is final, and the migration lands **in
+  the same commit** as the schema change — a schema edit without its
+  migration silently never reaches deployed environments. Never edit a
+  committed migration; add a new one. The deploy pipeline runs
+  `db:migrate` against that environment's database before building.
+- **`code-review.md`**: after any code change, run `/code-review` and fix
+  findings **before** committing — only when the code-review skill is
+  actually installed (it appears in the available-skills list); if it
+  isn't, commit without improvising an ad-hoc review. Docs-only changes
+  are exempt; when in doubt, review anyway. The point: the working
+  branch's history is what reviewers read, so findings get fixed
+  pre-commit instead of surfacing in PR review.
+
+## Step 9 — Agent workflow conventions (if available)
 
 If the `setup-matt-pocock-skills` skill is installed, invoke it now to
 layer the agent-workflow conventions (issue tracker, triage labels, domain
@@ -296,7 +330,7 @@ it's usually installed globally (`~/.claude/skills/`), with
 covers both, so trust it over guessing paths. If it isn't installed in
 either scope, skip silently — don't hunt for it.
 
-## Step 9 — Report
+## Step 10 — Report
 
 Summarize what was installed and why (tied back to the interview answers),
 list the scripts, and call out anything deferred (auth, deployment target,
