@@ -283,6 +283,10 @@ Once both are present:
 - Encode the convention in AGENTS.md / CLAUDE.md: designs live in
   `designs/<app>.pen` via the Pencil MCP; `/impeccable` governs design
   quality; design precedes implementation.
+- Design each screen in two passes, template then page: first the
+  structure (layout, dynamic-content bounds), then real representative
+  content including the extremes named in `design-system.md` (step 8).
+  A screen isn't designed until its extremes are mocked.
 
 Skip this step entirely for backend/API projects.
 
@@ -312,6 +316,37 @@ domains and scripts), never with another app's specifics:
   migration silently never reaches deployed environments. Never edit a
   committed migration; add a new one. The deploy pipeline runs
   `db:migrate` against that environment's database before building.
+- **`design-system.md`** (frontend projects only): atomic design's five
+  levels — atoms, molecules, organisms, templates, pages — are the shared
+  vocabulary for component **granularity**, used in design conversations,
+  critiques, and PR discussion. Never as folder names: folders stay
+  domain-based, and components are named for what they are (`SearchForm`,
+  not `MoleculeSearch`). Atoms are mostly the vendored shadcn primitives
+  in `components/ui/`; everything above them earns extraction the usual
+  way — the model is concurrent, not linear, so never pre-build a
+  component library. The vocabulary answers "how big is this?", not
+  "should this be shared?" — a header accumulating search, nav, and
+  session state is an organism pretending to be a molecule: split it.
+  Templates prove content *structure*; pages prove it against real
+  content. Every designed screen and every implemented view gets
+  exercised with the content and state extremes before it's called done:
+  - longest realistic name/headline — does it wrap or truncate well?
+  - unbroken strings (emails, URLs, IDs/tokens) — no spaces means normal
+    wrapping never kicks in; they blow out flex/grid containers unless
+    `overflow-wrap` or truncation is designed in;
+  - empty vs one vs many, for every list;
+  - numeric/date extremes — 0, negative, 1,000,000+, long currency and
+    timezone-qualified dates; alignment, badges, and axes break at the
+    ends of the range;
+  - async and error states — loading skeleton, failed fetch, offline;
+    every screen has more states than the happy mock, and a state that
+    isn't designed gets improvised in code;
+  - locale expansion and RTL — text ~30% longer than English, mirrored
+    layout; labels designed at English length clip first;
+  - sections suppressed by permissions or feature flags.
+
+  Extremes that break move the fix down to the molecule that owns it,
+  not a page-level patch.
 - **`code-review.md`**: after any code change, run `/code-review` and fix
   findings **before** committing — only when the code-review skill is
   actually installed (it appears in the available-skills list); if it
