@@ -1,0 +1,8 @@
+{
+  "pnpm": "corepack enable && corepack prepare pnpm@latest --activate (corepack ships with Node)",
+  "docker": {
+    "darwin": "brew install --cask docker",
+    "linux": "sudo apt install docker.io docker-compose-plugin (or https://docs.docker.com/engine/install/)",
+    "win32": "winget install Docker.DockerDesktop"
+  }
+}

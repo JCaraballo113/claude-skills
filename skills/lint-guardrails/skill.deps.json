@@ -1,0 +1,7 @@
+{
+  "jq": {
+    "darwin": "brew install jq",
+    "linux": "sudo apt install jq",
+    "win32": "winget install jqlang.jq"
+  }
+}

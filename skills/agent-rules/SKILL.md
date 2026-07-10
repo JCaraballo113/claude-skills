@@ -1,0 +1,92 @@
+---
+name: agent-rules
+description: Encode working conventions as one rule file per concern in .claude/rules/ — testing (happy/negative path), migrations, design-system (atomic design vocabulary + content extremes), code-review, finding-unknowns — generalized to the project at hand, any ecosystem. Use when the user says "setup agent rules", "encode the agent rules", or via setup-tooling.
+---
+
+# Agent Rules
+
+Encode the working conventions as one rule file per concern in
+`.claude/rules/` — checked in, loaded as project instructions every
+session. Write them generalized to the project at hand (its actual
+domains, scripts, and stack), never with another app's specifics.
+
+Two rules gate on a skill being installed. The **installed-check** —
+inline this wording into each generated rule that uses it, so the rule
+stands alone in the target repo: *the skill counts as installed when it
+appears in the available-skills list in any scope — global, project, or
+plugin — possibly namespaced (e.g. `john-superpowers:finding-unknowns`);
+a name match under any namespace counts, and the list beats guessing
+filesystem paths.*
+
+The rules:
+
+- **`testing.md`** (every project): every test file (Vitest in JS; the
+  stack's runner elsewhere) groups specs under
+  `describe("Happy path")` and `describe("Negative path")`; when one file
+  covers several surfaces, nest the pair inside each surface's describe.
+  Happy path = the documented, intended behavior. Negative path =
+  everything that must fail well (auth rejections, validation errors,
+  conflicts, malformed data, downstream failures), asserting the
+  observable refusal — status, unchanged state, audit entry — not
+  internals. A surface with no negative specs is a smell. Spec files
+  mirror the domain seams of the source: group into `tests/<domain>/`
+  folders as domains accumulate — never one flat pile; a lone spec may
+  sit flat until its domain grows a second file. Shared infrastructure
+  lives in `tests/helpers/`.
+- **`migrations.md`** (only when the project has a DB): local dev is
+  push-based; deployed environments are migration-based (in JS:
+  Drizzle's `db:push` / `db:generate` / `db:migrate`). Generate the
+  migration once the shape is final, and it lands **in the same
+  commit** as the schema change — a schema edit without its migration
+  silently never reaches deployed environments. Never edit a committed
+  migration; add a new one. The deploy pipeline runs the migrations
+  against that environment's database before building.
+- **`design-system.md`** (frontend projects only): atomic design's five
+  levels — atoms, molecules, organisms, templates, pages — are the shared
+  vocabulary for component **granularity**, used in design conversations,
+  critiques, and PR discussion. Never as folder names: folders stay
+  domain-based, and components are named for what they are (`SearchForm`,
+  not `MoleculeSearch`). Atoms are mostly the vendored primitives (in JS
+  projects, the shadcn components in `components/ui/`); everything above
+  them earns extraction the usual way — the model is concurrent, not
+  linear, so never pre-build a component library. The vocabulary answers
+  "how big is this?", not "should this be shared?" — a header
+  accumulating search, nav, and session state is an organism pretending
+  to be a molecule: split it. Templates prove content *structure*; pages
+  prove it against real content. Every designed screen and every
+  implemented view gets exercised with the content and state extremes
+  before it's called done:
+  - longest realistic name/headline — does it wrap or truncate well?
+  - unbroken strings (emails, URLs, IDs/tokens) — no spaces means normal
+    wrapping never kicks in; they blow out flex/grid containers unless
+    `overflow-wrap` or truncation is designed in;
+  - empty vs one vs many, for every list;
+  - numeric/date extremes — 0, negative, 1,000,000+, long currency and
+    timezone-qualified dates; alignment, badges, and axes break at the
+    ends of the range;
+  - async and error states — loading skeleton, failed fetch, offline;
+    every screen has more states than the happy mock, and a state that
+    isn't designed gets improvised in code;
+  - locale expansion and RTL — text ~30% longer than English, mirrored
+    layout; labels designed at English length clip first;
+  - sections suppressed by permissions or feature flags.
+
+  Extremes that break move the fix down to the molecule that owns it,
+  not a page-level patch.
+- **`code-review.md`**: after any code change, run `/code-review` and fix
+  findings **before** committing — only when the code-review skill
+  passes the installed-check; if it doesn't, commit without improvising
+  an ad-hoc review. Docs-only changes
+  are exempt; when in doubt, review anyway. The point: the working
+  branch's history is what reviewers read, so findings get fixed
+  pre-commit instead of surfacing in PR review.
+- **`finding-unknowns.md`**: before implementing a non-trivial feature —
+  new domain, schema change, unfamiliar area of the codebase — run
+  `/john-superpowers:finding-unknowns` to map the unknowns (four-quadrant
+  pass: verify assumptions against the code, interview open questions,
+  prototype taste calls, teach blindspots) before writing code — only
+  when the skill passes the installed-check; skip silently when it
+  doesn't. Mechanical changes and bug fixes
+  with an obvious cause are exempt. The point: unknowns get surfaced
+  while they're cheap — during planning, not after implementation comes
+  back wrong.
