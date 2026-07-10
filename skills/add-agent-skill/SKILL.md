@@ -1,6 +1,6 @@
 ---
 name: add-agent-skill
-description: Scaffold a new agent skill in the user's claude-skills repository. Interviews the user for name, triggers, and purpose, writes a SKILL.md with proper frontmatter, installs it locally via install.sh, and leaves the content for the user to fill in. Use when the user says "add an agent skill", "scaffold an agent skill", "new agent skill", "new skill in my claude-skills repo", or wants to start a new skill in their claude-skills repository.
+description: Scaffold a new agent skill in the user's claude-skills plugin repository. Interviews the user for name, triggers, and purpose, writes a SKILL.md with proper frontmatter under skills/, tells the user how to reload the plugin, and leaves the content for the user to fill in. Use when the user says "add an agent skill", "scaffold an agent skill", "new agent skill", "new skill in my claude-skills repo", or wants to start a new skill in their claude-skills repository.
 ---
 
 # Add Agent Skill
@@ -16,11 +16,10 @@ Scaffold a new skill in the user's `claude-skills` repo. The goal is a clean, in
 Resolve the repo path in this order, stopping at the first match:
 
 1. `$CLAUDE_SKILLS_REPO` env var, if set
-2. The repo that contains this skill — derive from `$(dirname "$(readlink -f "$0")")/..` equivalent. In practice: check if `$HOME/.claude/skills/add-skill/.installed-from` exists, read its `repo=` line
-3. Common locations: `$HOME/Repos/claude-skills`, `$HOME/claude-skills`, `$HOME/src/claude-skills`
-4. Ask the user for the absolute path
+2. Common locations: `$HOME/Repos/claude-skills`, `$HOME/Documents/repos/claude-skills`, `$HOME/claude-skills`, `$HOME/src/claude-skills`
+3. Ask the user for the absolute path
 
-Confirm the resolved path before writing anything. The repo must have an `install.sh` at its root — if not, you're in the wrong place.
+Confirm the resolved path before writing anything. The repo must have a `.claude-plugin/plugin.json` at its root and a `skills/` directory — if not, you're in the wrong place.
 
 ## Step 2 — Interview the user
 
@@ -74,7 +73,7 @@ Show the drafted frontmatter + title + outline (not full body) to the user. Wait
 
 ## Step 4 — Write the file
 
-Create `<repo>/<name>/SKILL.md` with the approved frontmatter and the outline. Leave placeholder content under the step headings — explicitly marked as TODO so the user knows to fill it in:
+Create `<repo>/skills/<name>/SKILL.md` with the approved frontmatter and the outline. Leave placeholder content under the step headings — explicitly marked as TODO so the user knows to fill it in:
 
 ```markdown
 ### 1. <First step>
@@ -84,20 +83,23 @@ TODO: describe what happens here.
 
 Do **not** invent a workflow body the user didn't ask for. The skill is a stub — the user completes it.
 
-## Step 5 — Install locally
+## Step 5 — Make it available
 
-Run `<repo>/install.sh <name>` to copy the skill into `~/.claude/skills/<name>/`. Show the output. The skill becomes available immediately.
+The repo is a Claude Code plugin; installed copies come from the plugin system, not a script. Tell the user to refresh so the new skill is picked up:
 
-```bash
-cd <repo> && ./install.sh <name>
 ```
+/plugin marketplace update jcaraballo
+/reload-plugins
+```
+
+(These are user-run slash commands — you can't execute them yourself.) If the marketplace was added from GitHub rather than the local clone, the refresh only sees committed + pushed changes, so this step may need to wait until after Step 7.
 
 ## Step 6 — Update the README
 
 Add a row to the skills table in `<repo>/README.md`:
 
 ```markdown
-| [<name>](./<name>/SKILL.md) | <one-line description, can be a trimmed version of the frontmatter description> |
+| [<name>](./skills/<name>/SKILL.md) | <one-line description, can be a trimmed version of the frontmatter description> |
 ```
 
 Keep the table alphabetical unless the user prefers another order.
@@ -118,5 +120,5 @@ Ask if they want to commit and push. Only do it on explicit approval.
 
 - This skill scaffolds; it doesn't write the skill's actual workflow. If the user wants help designing the workflow body, offer to continue once the stub is in place.
 - If the repo path can't be resolved confidently, stop and ask. Don't scaffold into the wrong location.
-- Name collision: if `<repo>/<name>/` already exists, ask before overwriting — this is almost always a mistake.
+- Name collision: if `<repo>/skills/<name>/` already exists, ask before overwriting — this is almost always a mistake.
 - Frontmatter must be valid YAML. Descriptions with colons, quotes, or newlines need escaping — prefer keeping descriptions single-line with straight punctuation.

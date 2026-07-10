@@ -1,0 +1,10 @@
+{
+  "name": "claude-skills",
+  "description": "Personal collection of Claude Code skills — PR workflows (open, triage, status), JS/TS project bootstrap, teaching sessions, UX bridging, and self-contained HTML artifacts.",
+  "version": "1.0.0",
+  "author": {
+    "name": "John Caraballo",
+    "email": "jcaraballo.dev@gmail.com"
+  },
+  "repository": "https://github.com/JCaraballo113/claude-skills"
+}

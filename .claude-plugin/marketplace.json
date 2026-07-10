@@ -1,0 +1,15 @@
+{
+  "name": "jcaraballo",
+  "description": "John Caraballo's personal Claude Code plugin marketplace.",
+  "owner": {
+    "name": "John Caraballo",
+    "email": "jcaraballo.dev@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "claude-skills",
+      "source": "./",
+      "description": "Personal collection of Claude Code skills — PR workflows, JS/TS bootstrap, teaching sessions, UX bridging, and HTML artifacts."
+    }
+  ]
+}
