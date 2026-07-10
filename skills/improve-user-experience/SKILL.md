@@ -11,10 +11,10 @@ Surface experiential friction and propose **bridging opportunities** — changes
 
 Design is how this skill models experience, and it holds that design to a quality bar — so two dependencies are **required**, not optional:
 
-- **Pencil MCP** — the `.pen` design editor. Every read of the designed experience and every bridge you produce goes through it. Install: <https://www.pencil.dev/>
-- **`impeccable` skill** — the visual-craft bar every bridge design is held to. Layered on top of the design, never a substitute for closing the gulf. Install: `npx skills add https://github.com/pbakaus/impeccable --skill impeccable`
+- **Pencil MCP** — the `.pen` design editor. Every read of the designed experience and every bridge you produce goes through it.
+- **`impeccable` skill** — the visual-craft bar every bridge design is held to. Layered on top of the design, never a substitute for closing the gulf.
 
-**Preflight before any design work.** If the Pencil MCP tools aren't connected or the `impeccable` skill isn't installed, **stop and ask the user to install/connect them** (install steps above) before continuing — do not fall back to hand-drawn mockups or unpolished designs. (A missing `.pen` *file* in the project is fine — that's a project state, not a missing dependency; you'll create one in phase 3.)
+**Preflight before any design work.** If the Pencil MCP tools aren't connected or the `impeccable` skill isn't installed, **stop and ask the user to install/connect them** (install commands in [skill.deps.json](./skill.deps.json)) before continuing — do not fall back to hand-drawn mockups or unpolished designs. (A missing `.pen` *file* in the project is fine — that's a project state, not a missing dependency; you'll create one in phase 3.)
 
 ## Glossary
 

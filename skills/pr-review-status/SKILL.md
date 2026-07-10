@@ -93,6 +93,7 @@ Do **not** auto-invoke `triage-pr-comments`. The user decides when to switch int
 ## Notes
 
 - This skill is strictly read-only. No `git` mutations, no `gh` writes, no file edits.
+- Needs `gh` and `git`; if one is missing, prompt the user with its install command from [skill.deps.json](./skill.deps.json).
 - SHA detection uses a 7-40 hex regex. If a reply says "fixed in 5df52c3" that counts as addressed, but "5df" alone wouldn't. Lean slightly false-negative — better to flag "in-discussion" than claim something's done when it isn't.
 - The `.pr-review-decisions/<pr>.md` format comes from `triage-pr-comments`. If the file doesn't exist, just skip the `deferred` bucket — don't error.
 - CodeRabbit comments have long `<details>` blocks. For the one-line summary, extract the bold `**...**` headline near the top of the body (that's their "Proposed change" title) and fall back to the first non-empty line if no headline.

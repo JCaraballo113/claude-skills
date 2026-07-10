@@ -132,7 +132,7 @@ If no template exists, use the three-section body in [BODY-FORMAT.md](./BODY-FOR
 
 ## Reusability and overrides
 
-This skill assumes git, `gh`, and a GitHub remote. Beyond that, it adapts via what it reads — default branch, diff, commits, tickets, PR template.
+This skill assumes git, `gh`, and a GitHub remote. If a CLI is missing, prompt the user with its install command from [skill.deps.json](./skill.deps.json). Beyond that, it adapts via what it reads — default branch, diff, commits, tickets, PR template.
 
 If a repo needs different behavior — strict ticket-in-title, mandatory checklist, non-GitHub forge — drop a `.claude/skills/open-pr/SKILL.md` in the repo. Repo-local replaces global. Do not add a config file.
 

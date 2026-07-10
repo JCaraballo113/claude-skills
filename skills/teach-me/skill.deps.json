@@ -1,0 +1,13 @@
+{
+  "git": {
+    "darwin": "brew install git",
+    "linux": "sudo apt install git",
+    "win32": "winget install Git.Git"
+  },
+  "jq": {
+    "darwin": "brew install jq",
+    "linux": "sudo apt install jq",
+    "win32": "winget install jqlang.jq"
+  },
+  "ntn": "npm install -g ntn, then ntn login"
+}

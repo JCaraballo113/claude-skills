@@ -47,10 +47,10 @@ Skills live under [`skills/`](./skills). Once the plugin is installed they're in
 | [finding-unknowns](./skills/finding-unknowns/SKILL.md) | Classifies your unknowns about a piece of work into four quadrants (known/unknown × knowns/unknowns) and runs the right technique per quadrant — verify, interview, prototype/reference, or blindspot pass — with phase-specific exits. |
 | [grill-unknowns](./skills/grill-unknowns/SKILL.md) | Composer: runs a `/grilling` session using `finding-unknowns`. A relentless interview to find the gap between your plan and the codebase's real constraints — before, during, or after implementation. External deps declared in its `skill.deps.json`. |
 | [html-artifact](./skills/html-artifact/SKILL.md) | Generate a single self-contained HTML artifact (inline CSS + inline SVG + optional inline JS) that visually explains a system, feature, or codebase area. Output is one file in `docs/` that opens offline. Use when the user wants to visualize a system, generate a flow diagram, build a one-pager explainer, or asks to "make an HTML artifact" / "visualize X" / "explain X visually". Good for state machines, planner/decision logic, data flows, and architectural overviews with optional interactive widgets. |
-| [improve-user-experience](./skills/improve-user-experience/SKILL.md) | Find "bridging opportunities" — gulfs the user has to cross themselves — using Don Norman's gulf vocabulary (execution / evaluation, signifier, feedback). Walks the flows, presents candidates as a temp-dir HTML report, then grills the chosen one and designs the bridge in Pencil, held to `impeccable`'s bar. Anchored to `EXPERIENCE.md` (human-owned) + `CONTEXT.md`. Requires the Pencil MCP and the `impeccable` skill. Use when the user wants to improve UX, reduce friction, or fix where users get stuck. |
+| [improve-user-experience](./skills/improve-user-experience/SKILL.md) | Find "bridging opportunities" — gulfs the user has to cross themselves — using Don Norman's gulf vocabulary (execution / evaluation, signifier, feedback). Walks the flows, presents candidates as a temp-dir HTML report, then grills the chosen one and designs the bridge in Pencil, held to `impeccable`'s bar. Anchored to `EXPERIENCE.md` (human-owned) + `CONTEXT.md`. Requires the Pencil MCP and the `impeccable` skill (declared in its `skill.deps.json`). Use when the user wants to improve UX, reduce friction, or fix where users get stuck. |
 | [open-pr](./skills/open-pr/SKILL.md) | Open a reviewer-oriented pull request from the current branch. Reads diff and commits, interrogates the author one question at a time (intent, type, scope, risk, out-of-scope, ticket), builds a What / Why / Notes-for-reviewers body inline, then pushes and opens via `gh` as a draft by default. Honors any repo PR template. |
 | [pr-review-status](./skills/pr-review-status/SKILL.md) | Read-only overview of the current branch's PR review comments — groups into addressed / pending / in-discussion / deferred. No edits, no posts. Pair with `triage-pr-comments` when you want to act on what you see. |
-| [setup-js-tooling](./skills/setup-js-tooling/SKILL.md) | Bootstrap a JS/TS project with the preferred stack (TanStack Start/Vite/Hono, Query, Form, Drizzle + Docker/Supabase, Zod, Tailwind, shadcn, Vitest, guardrail ESLint, GitHub CI) on pnpm with the 1-day package-age guard. Interviews for project type first; the linting section works standalone on existing repos. |
+| [setup-js-tooling](./skills/setup-js-tooling/SKILL.md) | Bootstrap a JS/TS project with the preferred stack (TanStack Start/Vite/Hono, Query, Form, Drizzle + Docker/Supabase, Zod, Tailwind, shadcn, Vitest, guardrail ESLint, GitHub CI) on pnpm with the 1-day package-age guard. Interviews for project type first; the linting section works standalone on existing repos. Design-step deps (Pencil MCP, `impeccable`) declared in its `skill.deps.json`. |
 | [teach-me](./skills/teach-me/SKILL.md) | A teaching session that makes sure you deeply understand a specific piece of work in this repo. Grounds itself in the code, git history, and ADRs, then walks you through the problem, the solution, and the broader context one item at a time — restating, drilling the whys, and quizzing — and won't finish until you've demonstrated mastery. Optionally saves durable study notes to Obsidian or Notion. |
 | [triage-pr-comments](./skills/triage-pr-comments/SKILL.md) | Active triage workflow: classifies each comment into one of five states (valid-fix / partial / invalid / defer / needs-info), asks clarifying questions when ambiguous, implements approved fixes, and gates commit/push/reply on explicit user approval. |
 
@@ -67,7 +67,20 @@ The installed plugin is managed by Claude Code's plugin system — never edit in
 Use the [`add-agent-skill`](./skills/add-agent-skill/SKILL.md) skill, or by hand:
 
 1. Create `skills/<name>/SKILL.md` with frontmatter (`name`, `description`) — see existing skills for examples.
-2. Validate: `claude plugin validate . --strict`
-3. Commit + push, then `/plugin marketplace update jcaraballo` and `/reload-plugins`.
+2. If the skill needs anything that doesn't ship in this plugin — external skills, MCP servers, system CLIs — declare it in `skills/<name>/skill.deps.json`, a map of dep name → install command (like a `package.json` for agent dependencies), and have the SKILL.md tell Claude to prompt the user with the install command when a dep is missing. When the install command is OS-dependent (typical for CLIs), the value is an object keyed by platform — `darwin` / `linux` / `win32`, matching the platform name the agent sees — and Claude uses the entry for the current OS:
+
+   ```json
+   {
+     "grilling": "npx skills add https://github.com/mattpocock/skills --skill grilling",
+     "jq": {
+       "darwin": "brew install jq",
+       "linux": "sudo apt install jq",
+       "win32": "winget install jqlang.jq"
+     }
+   }
+   ```
+
+3. Validate: `claude plugin validate . --strict`
+4. Commit + push, then `/plugin marketplace update jcaraballo` and `/reload-plugins`.
 
 The `description` field is what Claude uses to decide when to invoke the skill, so make it specific about the triggers (e.g. "use when user says X" / "use when Y condition").

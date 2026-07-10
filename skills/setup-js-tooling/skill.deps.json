@@ -1,0 +1,9 @@
+{
+  "impeccable": "npx skills add https://github.com/pbakaus/impeccable --skill impeccable",
+  "pencil-mcp": "Install the Pencil editor + MCP from https://www.pencil.dev/, then reconnect the session",
+  "jq": {
+    "darwin": "brew install jq",
+    "linux": "sudo apt install jq",
+    "win32": "winget install jqlang.jq"
+  }
+}

@@ -5,7 +5,7 @@ Notes are saved as Notion pages via the `ntn` CLI. Requires `ntn login` (OAuth, 
 ## Setup
 
 ```bash
-command -v ntn || echo "Install: npm install -g ntn"
+command -v ntn || echo "ntn missing — prompt the user with its install command from skill.deps.json"
 ntn login                      # one-time; opens browser (use --no-browser on headless, then 'ntn login poll')
 ```
 

@@ -265,14 +265,10 @@ UI is **always designed in Pencil** (a `.pen` design file driven through
 the Pencil MCP — never Read/Grep on `.pen` files) with the **`impeccable`**
 skill governing design quality. Design first, implement second.
 
-Check availability first, and prompt the user to install whatever is
-missing (don't install these silently):
-
-- `impeccable` not in the available-skills list → offer:
-  `npx skills add pbakaus/impeccable`
-- Pencil MCP tools not connected → point the user at
-  <https://www.pencil.dev/> to install the Pencil editor + MCP, then
-  reconnect the session.
+Check availability first — `impeccable` in the available-skills list,
+Pencil MCP tools connected. Prompt the user to install anything missing
+with its command from [skill.deps.json](./skill.deps.json); don't install
+these silently.
 
 Once both are present:
 
@@ -354,6 +350,15 @@ domains and scripts), never with another app's specifics:
   are exempt; when in doubt, review anyway. The point: the working
   branch's history is what reviewers read, so findings get fixed
   pre-commit instead of surfacing in PR review.
+- **`finding-unknowns.md`**: before implementing a non-trivial feature —
+  new domain, schema change, unfamiliar area of the codebase — run
+  `/john-superpowers:finding-unknowns` to map the unknowns (four-quadrant
+  pass: verify assumptions against the code, interview open questions,
+  prototype taste calls, teach blindspots) before writing code — only
+  when the skill is actually installed (available-skills list); skip
+  silently otherwise. Mechanical changes and bug fixes with an obvious
+  cause are exempt. The point: unknowns get surfaced while they're cheap
+  — during planning, not after implementation comes back wrong.
 
 ## Step 9 — Agent workflow conventions (if available)
 
