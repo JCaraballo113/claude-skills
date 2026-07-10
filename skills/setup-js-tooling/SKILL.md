@@ -355,10 +355,14 @@ domains and scripts), never with another app's specifics:
   `/john-superpowers:finding-unknowns` to map the unknowns (four-quadrant
   pass: verify assumptions against the code, interview open questions,
   prototype taste calls, teach blindspots) before writing code — only
-  when the skill is actually installed (available-skills list); skip
-  silently otherwise. Mechanical changes and bug fixes with an obvious
-  cause are exempt. The point: unknowns get surfaced while they're cheap
-  — during planning, not after implementation comes back wrong.
+  when the skill is installed in any scope: global, project, or via a
+  plugin. It appears in the available-skills list, possibly namespaced
+  (e.g. `john-superpowers:finding-unknowns`); a name match under any
+  namespace counts, and the list beats guessing filesystem paths. Skip
+  silently only when no scope has it. Mechanical changes and bug fixes
+  with an obvious cause are exempt. The point: unknowns get surfaced
+  while they're cheap — during planning, not after implementation comes
+  back wrong.
 
 ## Step 9 — Agent workflow conventions (if available)
 
