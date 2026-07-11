@@ -28,8 +28,5 @@ Once both are present:
   content including the extremes named in the design-system agent rule
   (`/john-superpowers:agent-rules`). A screen isn't designed until its
   extremes are mocked.
-- Mock repeated and data-driven content — lists, grids, charts, the
-  extremes above — with code-on-canvas Script nodes
-  (https://docs.pencil.dev/core-concepts/code-on-canvas): generate it
-  from data instead of hand-duplicating layers, converting to editable
-  layers only when a mock needs hand-tuning.
+- Mock repeated and data-driven content with code-on-canvas Script
+  nodes, per the same design-system agent rule.

@@ -1,6 +1,6 @@
 ---
 name: agent-rules
-description: Encode working conventions as one rule file per concern in .claude/rules/ — testing (happy/negative path), migrations, design-system (atomic design vocabulary + content extremes), code-review, finding-unknowns — generalized to the project at hand, any ecosystem. Use when the user says "setup agent rules", "encode the agent rules", or via setup-tooling.
+description: Encode working conventions as one rule file per concern in .claude/rules/ — testing (happy/negative path), migrations, design-system (atomic design vocabulary, content extremes, motion), code-review, finding-unknowns — generalized to the project at hand, any ecosystem. Use when the user says "setup agent rules", "encode the agent rules", or via setup-tooling.
 ---
 
 # Agent Rules
@@ -73,6 +73,17 @@ The rules:
 
   Extremes that break move the fix down to the molecule that owns it,
   not a page-level patch.
+
+  Mock repeated and data-driven content in the design file with Pencil
+  code-on-canvas Script nodes
+  (https://docs.pencil.dev/core-concepts/code-on-canvas) — generated
+  from data, not hand-duplicated layers, converting to editable layers
+  only when a mock needs hand-tuning. Motion: one animation library per project (GSAP in JS
+  projects), added when the UI first animates; feedback animation
+  budgets 100–200ms; every animated moment ships a
+  `prefers-reduced-motion` variant (color or opacity change); and
+  high-stakes moments — payments, destructive actions, errors involving
+  loss — get calm, plain feedback, no playfulness.
 - **`code-review.md`**: after any code change, run `/code-review` and fix
   findings **before** committing — only when the code-review skill
   passes the installed-check; if it doesn't, commit without improvising
