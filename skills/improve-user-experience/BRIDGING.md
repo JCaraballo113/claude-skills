@@ -1,6 +1,6 @@
 # Bridging
 
-How to close a gulf safely, given its type. Assumes the vocabulary in [LANGUAGE.md](LANGUAGE.md) — **Job**, **gulf of execution**, **gulf of evaluation**, **signifier**, **affordance**, **feedback**, **conceptual model**, **friction**, **bridge**.
+How to close a gulf safely, given its type. Assumes the vocabulary in [LANGUAGE.md](LANGUAGE.md).
 
 A bridge **removes** the gulf. It does not document it. Help text, tooltips, and onboarding tours are labels stuck over a gulf the user still has to cross — they are not bridges. Reach for them only when the gulf genuinely cannot be removed, and say so out loud.
 
@@ -24,6 +24,8 @@ The user acted but can't perceive or interpret the result. The bridge makes the 
 1. **Give immediate feedback.** The action changed state but said nothing. Make the result perceptible at the moment and place of the action — optimistic UI, a state change, motion, a disabled control flipping. **Feedback** is any perceptible result, not only a toast.
 2. **Show the state, don't announce it.** Persistent status the user can read at any time beats a transient message they may miss. Where is this in the flow, what's left, what happened — visible, not recalled.
 3. **Make the next action obvious.** Evaluation isn't done until the user knows what to do next. Every terminal state (success, error, empty) names its next step; an error with no recovery action is an evaluation gulf, not a bug report.
+
+When a feedback moment can carry personality — an acknowledgment, a celebration, a wait, an error — [DELIGHT.md](DELIGHT.md) has the timing budgets and restraint rules.
 
 ## Validate the gulf is real
 

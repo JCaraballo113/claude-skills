@@ -1,6 +1,6 @@
 ---
 name: improve-user-experience
-description: Find bridging opportunities in a product, informed by the intended experience in EXPERIENCE.md and the domain language in CONTEXT.md. Use when the user wants to improve UX, reduce friction in a flow, find where users get stuck or confused, or close the gap between what the product does and what it should feel like.
+description: Find bridging opportunities in a product, informed by the intended experience in EXPERIENCE.md and the domain language in CONTEXT.md. Use when the user wants to improve UX, reduce friction in a flow, find where users get stuck or confused, close the gap between what the product does and what it should feel like, or add purposeful delight (micro-interactions, celebrations, empathetic errors) to a flow.
 ---
 
 # Improve User Experience
@@ -47,6 +47,7 @@ Then walk the actual user flows in the area you're touching. Prefer **driving th
 - Where does the product's **conceptual model** contradict what the user already believes, forcing them to relearn it?
 - Where does a Job take more **friction** — steps, decisions, waiting — than the value it returns?
 - Where does an error leave the user stranded with no next action?
+- Where does the layout itself tax the Job — a frequent action rendered small or far from the user's attention (Fitts' Law), or one needed choice buried among many (Hick's Law)? (friction)
 - Where does the **built** screen diverge from the **designed** one in the `.pen` — a gulf introduced by drift, not by the design?
 
 Apply the **hesitation test** at every step: would a first-time user pause to ask "how do I do this?" or "did that work?" Each pause is a candidate. Confirm the gulf is real (a pattern, not one imagined user) before proposing a bridge.
@@ -67,7 +68,7 @@ Do NOT design the bridge in detail yet. After the file is written, ask the user:
 
 Once the user picks a candidate, drop into a grilling conversation. Walk the design tree with them — the user's Job, exactly where the gulf opens, the shape of the bridge, which signifier or feedback or model change closes it, and which states (empty, error, loading, success) the bridge must cover.
 
-**Model the bridge in Pencil, held to `impeccable`'s bar — don't describe it in prose.** Experience is designed, not specified — once the bridge's shape is settled, build it as an actual `.pen` design (`batch_design` against the schema from `get_editor_state`), covering every state the grilling surfaced. Layer `impeccable` over the design for visual hierarchy, motion, accessibility, and edge states, so the bridge ships polished, not merely functional. Then show the user a `get_screenshot`. The design _is_ this skill's deliverable: it ends at an approved `.pen` design, which becomes the spec whatever implements designs in the project builds from. Implementation is out of scope. When several bridge shapes are in play, design them as separate variants — see [BRIDGE-DESIGN.md](BRIDGE-DESIGN.md) for the design-the-bridge-twice pattern (parallel sub-agents, real `.pen` frames, not written specs).
+**Model the bridge in Pencil, held to `impeccable`'s bar — don't describe it in prose.** Experience is designed, not specified — once the bridge's shape is settled, build it as an actual `.pen` design (`batch_design` against the schema from `get_editor_state`), covering every state the grilling surfaced. Layer `impeccable` over the design for visual hierarchy, motion, accessibility, and edge states, so the bridge ships polished, not merely functional. Where the bridge's feedback moments can carry personality — acknowledgments, gestures, celebrations, waits, errors — hold them to [DELIGHT.md](DELIGHT.md). Then show the user a `get_screenshot`. The design _is_ this skill's deliverable: it ends at an approved `.pen` design, which becomes the spec whatever implements designs in the project builds from. Implementation is out of scope. When several bridge shapes are in play, design them as separate variants — see [BRIDGE-DESIGN.md](BRIDGE-DESIGN.md) for the design-the-bridge-twice pattern (parallel sub-agents, real `.pen` frames, not written specs).
 
 Side effects happen inline as decisions crystallize:
 

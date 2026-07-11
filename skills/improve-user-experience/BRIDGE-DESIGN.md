@@ -2,7 +2,7 @@
 
 When the user wants to explore alternative bridges for a chosen gulf, use this parallel sub-agent pattern. Based on "Design It Twice" (Ousterhout) — your first idea is unlikely to be the best, and experience is cheap to vary in design and expensive to vary in code.
 
-Uses the vocabulary in [LANGUAGE.md](LANGUAGE.md) — **Job**, **gulf**, **signifier**, **feedback**, **conceptual model**, **friction**, **bridge**. Closing tactics by gulf type are in [BRIDGING.md](BRIDGING.md).
+Uses the vocabulary in [LANGUAGE.md](LANGUAGE.md); closing tactics by gulf type are in [BRIDGING.md](BRIDGING.md).
 
 **Requires Pencil + `impeccable`** (see the Required tooling section of [SKILL.md](SKILL.md)). The output of this pattern is real `.pen` design variants the user can see and compare — never written interface specs. If the tooling isn't available, stop and prompt the user to install it before running this; don't substitute prose mockups.
 

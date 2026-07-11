@@ -1,6 +1,6 @@
 ---
 name: setup-js-stack
-description: The JS/TS stack module for setup-tooling — TanStack Start (or Vite for SPAs), TanStack Query/Form, Zustand for client state when needed, Hono for pure backends, Drizzle + Docker/Supabase Postgres, Zod, Tailwind, shadcn, Vitest, GitHub Actions CI, all on pnpm with the 1-day package-age guard. Use when the user says "setup js tooling", "setup the js stack", or bootstraps a fresh JS/TS repo — usually composed by setup-tooling.
+description: The JS/TS stack module for setup-tooling — TanStack Start (or Vite for SPAs), TanStack Query/Form, Zustand for client state when needed, GSAP for motion/animation, Hono for pure backends, Drizzle + Docker/Supabase Postgres, Zod, Tailwind, shadcn, Vitest, GitHub Actions CI, all on pnpm with the 1-day package-age guard. Use when the user says "setup js tooling", "setup the js stack", or bootstraps a fresh JS/TS repo — usually composed by setup-tooling.
 ---
 
 # Setup JS Stack
@@ -22,6 +22,7 @@ existing code. One extra detail question is this module's own:
 | Forms | TanStack Form + Zod | TanStack Form + Zod | — |
 | Validation | Zod (single source of truth, shared client/server) | Zod | Zod (`@hono/zod-validator`) |
 | Styling | Tailwind + shadcn | Tailwind + shadcn | — |
+| Motion | GSAP (when the UI animates) | GSAP (when the UI animates) | — |
 | ORM/DB | Drizzle + Docker/Supabase Postgres | (via its API) | Drizzle + Docker/Supabase Postgres |
 | Design | `/john-superpowers:design-tooling` | `/john-superpowers:design-tooling` | — |
 | Tests | Vitest | Vitest | Vitest |
