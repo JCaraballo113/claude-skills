@@ -149,7 +149,7 @@ Show **all** drafts to the user in one message — full text of each, grouped by
 
 ### 9. Post replies — only after explicit approval
 
-Only after the user has explicitly approved (per the hard rule in step 8), post via the dedicated replies endpoint.
+Post via the dedicated replies endpoint.
 
 **Gotcha:** `POST /pulls/<num>/comments` with `in_reply_to` in the body **does not work** via `gh api -f` because `-f` stringifies and the API rejects the string. Use the dedicated replies endpoint instead:
 

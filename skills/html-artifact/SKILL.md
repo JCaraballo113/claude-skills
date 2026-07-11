@@ -7,19 +7,9 @@ description: Generate a single self-contained HTML artifact (inline CSS + inline
 
 Produces a polished, single-file HTML explainer of any system in the user's codebase. The point is to help an engineer (or a stakeholder) **see and reason about** a feature — its model, its flow, its decision logic, its failure modes — without leaving the browser.
 
-Self-contained — opens offline, no CDNs, no fetches.
-
-## Quick start
-
-1. Identify what to visualize.
-2. Read the source-of-truth: relevant code files + ADRs + design docs.
-3. Pick whichever sections actually help reason about *this* feature (see "Section vocabulary" below — it's a menu, not a checklist).
-4. Save the artifact to `docs/<feature>-flow.html` (or wherever fits the repo's convention).
-5. Confirm it renders standalone by opening with `file://`.
-
 ## Workflow
 
-1. **Decide what the engineer needs to see.** A state-machine-heavy feature wants a flowchart. A planner-heavy feature wants step cards + worked scenarios + maybe an interactive widget. A data-flow feature wants entity boxes + arrows. Don't impose sections the feature doesn't earn.
+1. **Read the source-of-truth, then decide what the engineer needs to see.** Read the relevant code files + ADRs + design docs first. A state-machine-heavy feature wants a flowchart. A planner-heavy feature wants step cards + worked scenarios + maybe an interactive widget. A data-flow feature wants entity boxes + arrows. Don't impose sections the feature doesn't earn.
 
 2. **Section vocabulary** — common reusable shapes. Use what fits; combine or skip freely:
    - **Overview / lede** — one paragraph: what is this, who reads it, where the truth lives.
@@ -43,7 +33,7 @@ Self-contained — opens offline, no CDNs, no fetches.
 
 5. **Interactive widgets** — when the system has a pure decision function (a planner, router, fee calculator, state-transition function), re-implement it in vanilla JS inline and let engineers tinker with inputs. Show: the inputs, per-entity derived state, the verdict (color-coded), and which branch fired. Use `BigInt` where the real system does. The widget is often the single most useful section.
 
-6. **Self-contained check** — no `<script src>`, no `<link href>` to external assets, no `fetch()`. Target file size under ~70 KB. Open the saved file with `file://` to verify it renders standalone.
+6. **Save + self-contained check** — save to `docs/<feature>-flow.html` (or wherever fits the repo's convention). No `<script src>`, no `<link href>` to external assets, no `fetch()`. Target file size under ~70 KB. Open the saved file with `file://` to verify it renders standalone.
 
 ## Layout conventions
 

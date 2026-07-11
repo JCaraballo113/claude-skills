@@ -107,17 +107,11 @@ One larger card. Bridge name, one sentence on why, anchor link to its card. That
 
 Plain English, concise — but the experience nouns and verbs come straight from [LANGUAGE.md](LANGUAGE.md). Concision is not an excuse to drift.
 
-**Use exactly:** Job, gulf of execution, gulf of evaluation, signifier, affordance, feedback, conceptual model, friction, bridge.
-
-**Never substitute:** confusing, clunky, intuitive, smooth (mood words) · "the button" (for signifier) · "more features" (for a bridge).
-
 **Phrasings that fit the style:**
 
 - "Execution gulf at the reason step — no default, the user has to decide."
 - "Action submits, but no feedback — evaluation gulf."
 - "Bridge: infer the reason; delete the decision."
 - "Friction: 3 decisions → 0."
-
-**Wins bullets** name the gain in glossary terms: *"signifier placed where the Job looks"*, *"feedback closes the evaluation gulf"*, *"friction: 3 decisions → 0"*. Don't write *"cleaner"* or *"more intuitive"* — those aren't in the glossary and don't earn their place.
 
 No hedging, no throat-clearing, no "it's worth noting that…". If a sentence could be a bullet, make it a bullet. If a bullet could be cut, cut it. If a term isn't in [LANGUAGE.md](LANGUAGE.md), reach for one that is before inventing a new one.

@@ -43,7 +43,7 @@ Confirm I have mastered the current item before moving to the next. For each ite
 - **Show me the code** (`file:line`) or walk me through it with the debugger when seeing it beats describing it.
 - **Show it visually when it helps.** For flow, state, structure, math, or timelines, embed a mermaid diagram in the note by default; for a complex or highly visual topic (or when I ask), offer a full interactive HTML explainer. See [VISUALS.md](./VISUALS.md).
 - **Quiz me** with `AskUserQuestion` — open-ended or multiple choice. Vary the position of the correct answer, and don't reveal the answer until after I've submitted.
-- **Update the note inline** — check the item off and capture the explanation as it crystallises, then persist. Mark an item done only if I *demonstrated* it, not because we covered it.
+- **Update the note inline** — check the item off and capture the explanation as it crystallises, then persist. Mark an item done only if I *demonstrated* it — restated correctly, survived the whys, passed the quiz — not because we covered it.
 
 Ask one thing at a time and wait for my response before continuing. If something can be answered by exploring the codebase, explore it rather than guessing.
 
@@ -68,30 +68,12 @@ Accuracy matters more than fluency:
 - If ADRs exist (`docs/adrs/`), read the relevant ones for the *why*. If there are none, the *why* lives only in the code and git history — reconstruct it from there.
 - If my restated understanding contradicts the code or an ADR, stop and reconcile it before moving on. A confidently-wrong learner is the failure mode to avoid.
 
-## Restate-first, then fill gaps
-
-Always probe before you explain. The gap between what I say and what's true tells you exactly what to teach. Lecturing first wastes the session on what I already know and hides what I don't.
-
 ## Drill the whys
 
 A single why is rarely enough. "Why round in favor of the vault?" → "to protect shareholders" → "why does that need protecting?" → "because a JIT depositor could otherwise…". Keep descending until the answer is a first principle, not a restatement.
 
-## Coverage is not learning
-
-Marking an item done because "we talked about it" defeats the purpose. Check it off only on *demonstrated* understanding. A corrected misconception is the highest-value moment in the session — capture it in "Gaps found", because it predicts where I'll stumble on related topics later.
-
-## Visual aids
-
-Default to mermaid diagrams embedded in the note (they render in both Obsidian and Notion and stay with the note). Escalate to a standalone interactive HTML explainer for complex/visual topics or on request. Details and the quality bar are in [VISUALS.md](./VISUALS.md).
-
 ## Quizzing rules
 
-Use `AskUserQuestion`. Mix open-ended with multiple choice. For multiple choice: vary which option is correct; make wrong options *plausible* (real misconceptions), not throwaways; never reveal or hint until I've submitted, then explain why the right answer is right and each wrong one is wrong. A failed quiz is the gap — re-teach, re-quiz, then mark mastered.
-
-## Pacing and exit
-
-- One item at a time. Do not advance while the current item is unmastered, at either level.
-- Mastery means *demonstrated*: I restated it correctly, survived the whys, and passed the quiz.
-- The session ends only when every checklist item is demonstrated — not when we've "covered" the material.
+Use `AskUserQuestion`. Mix open-ended with multiple choice. For multiple choice: vary which option is correct; make wrong options *plausible* (real misconceptions), not throwaways; never reveal or hint until I've submitted, then explain why the right answer is right and each wrong one is wrong. A failed quiz is the gap — re-teach, re-quiz, then mark mastered. A corrected misconception is the highest-value moment in the session — capture it in "Gaps found", because it predicts where I'll stumble on related topics later.
 
 </supporting-info>

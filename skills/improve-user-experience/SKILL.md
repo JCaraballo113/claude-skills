@@ -30,12 +30,6 @@ Use these terms exactly in every suggestion. Consistent language is the point �
 - **Friction** — effort, decisions, waiting, or steps the user spends that don't advance the Job. The quantity being reduced.
 - **Bridge** — a design change that closes a gulf so the user no longer crosses it themselves. The verb of this skill.
 
-Key principles (see [LANGUAGE.md](LANGUAGE.md) for the full list):
-
-- **Gulfs belong to the design, not the user.** When a user hesitates, the design left a gulf — name it, don't label the user confused.
-- **The hesitation test**: walk the flow as a first-timer who can't ask anyone. Every pause is a gulf — "how?" = execution, "did it work?" = evaluation.
-- **One confused user is a hypothesis; a pattern of hesitation is a gulf.** Validate the gulf is real before building the bridge.
-
 This skill is _informed_ by the project's intended experience. `EXPERIENCE.md` says what the product should do and feel like; `CONTEXT.md` names the domain. The skill finds where the built experience falls short of the intended one — and never edits `EXPERIENCE.md` itself without explicit human approval: it is human-owned, the source of truth code conforms to, not the reverse.
 
 ## Process
@@ -61,24 +55,11 @@ Apply the **hesitation test** at every step: would a first-time user pause to as
 
 Write a self-contained HTML file to the OS temp directory so nothing lands in the repo. Resolve the temp dir from `$TMPDIR`, falling back to `/tmp` (or `%TEMP%` on Windows), and write to `<tmpdir>/ux-review-<timestamp>.html` so each run gets a fresh file. Open it for the user — `xdg-open <path>` on Linux, `open <path>` on macOS, `start <path>` on Windows — and tell them the absolute path.
 
-The report uses **Tailwind via CDN** for layout and **Mermaid via CDN** for diagrams where a journey/flow/sequence reliably communicates the structure. Mix Mermaid with hand-crafted CSS/SVG visuals — use Mermaid when the flow is graph-shaped (user journeys, state transitions, step sequences), and hand-built divs/SVG for something more editorial (a gulf rendered as an actual gap the user leaps, a friction tally, a before/after step count). Each candidate gets a **before/after visualisation**. Be visual.
-
-For each candidate, render a card with:
-
-- **Flow** — which screens/steps/states are involved
-- **Gulf** — which Job, and whether it's a Gulf of Execution or Evaluation; what's missing (signifier, feedback, model match)
-- **Bridge** — plain English description of what would change so the user stops crossing the gulf
-- **Wins** — explained in glossary terms, and how the hesitation test improves
-- **Before / After diagram** — side-by-side, showing the gulf and the bridge. The "before" can embed a real frame exported from the `.pen` design (or a screenshot of the built screen); the "after" stays a lightweight sketch — full Pencil design work waits until phase 3, on the chosen bridge only
-- **Recommendation strength** — one of `Strong`, `Worth exploring`, `Speculative`, rendered as a badge
-
-End the report with a **Top recommendation** section: which bridge you'd build first and why.
+Each candidate gets a card with a **before/after visualisation** and a recommendation-strength badge; the report ends with a **Top recommendation** section. The full scaffold, candidate-card fields, diagram patterns, and styling live in [JOURNEY-REPORT.md](JOURNEY-REPORT.md) — follow it.
 
 **Use CONTEXT.md vocabulary for the domain, and [LANGUAGE.md](LANGUAGE.md) vocabulary for the experience.** Talk about "the Job: return an item" and "the execution gulf at the payment step" — not "the confusing button" or "the bad onboarding."
 
 **EXPERIENCE.md conflicts**: if a candidate contradicts the documented intended experience, only surface it when the friction is real enough to warrant revisiting that intent. Mark it clearly in the card (e.g. a warning callout: _"contradicts EXPERIENCE.md §Onboarding — but worth reopening because…"_). Don't list every theoretical change the doc rules out.
-
-See [JOURNEY-REPORT.md](JOURNEY-REPORT.md) for the full HTML scaffold, diagram patterns, and styling guidance.
 
 Do NOT design the bridge in detail yet. After the file is written, ask the user: "Which of these would you like to explore?"
 

@@ -9,5 +9,6 @@
     "linux": "sudo apt install jq",
     "win32": "winget install jqlang.jq"
   },
-  "ntn": "npm install -g ntn, then ntn login"
+  "ntn": "npm install -g ntn, then ntn login",
+  "obsidian": "Install Obsidian desktop 1.12.7+ from https://obsidian.md, then enable the CLI (Settings → General)"
 }

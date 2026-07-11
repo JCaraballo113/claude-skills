@@ -83,6 +83,8 @@ TODO: describe what happens here.
 
 Do **not** invent a workflow body the user didn't ask for. The skill is a stub — the user completes it.
 
+If the skill will need anything that doesn't ship in this plugin — external skills, MCP servers, system CLIs — scaffold a `skills/<name>/skill.deps.json` too: a map of dep name → install command, using an object keyed by `darwin`/`linux`/`win32` when the command is OS-dependent. Have the SKILL.md prompt the user with the install command when a dep is missing. See existing manifests for examples.
+
 ## Step 5 — Make it available
 
 The repo is a Claude Code plugin; installed copies come from the plugin system, not a script. Tell the user to refresh so the new skill is picked up:
@@ -105,6 +107,8 @@ Add a row to the skills table in `<repo>/README.md`:
 Keep the table alphabetical unless the user prefers another order.
 
 ## Step 7 — Suggest commit + push
+
+Bump the `version` in `.claude-plugin/plugin.json` first — plugin updates are version-gated, so a pushed change without a bump never propagates to installed copies.
 
 Do **not** auto-commit. Show the user the new files (`git status` + `git diff README.md`), and propose a commit message:
 

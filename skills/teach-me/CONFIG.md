@@ -41,7 +41,7 @@ Notes config for the teach-me skill. Edit `notes:` or delete this file to reconf
    - Notion: `command -v ntn`.
    - Obsidian: see detection in [OBSIDIAN.md](./OBSIDIAN.md) (PATH on mac/linux; `Obsidian.com` under `/mnt/c/Users/*/AppData/Local/Programs/Obsidian/` on WSL).
 
-3. **Ask once** with `AskUserQuestion`: *"Save study notes from teaching sessions, and where?"* Offer the detected backends first, plus "No notes". If the user picks a backend whose CLI was **not** detected, tell them how to install it (Obsidian: ships with desktop 1.12.7+, enable in Settings → General; Notion: `npm install -g ntn` then `ntn login`) and offer to: retry detection / pick the other backend / skip notes for now.
+3. **Ask once** with `AskUserQuestion`: *"Save study notes from teaching sessions, and where?"* Offer the detected backends first, plus "No notes". If the user picks a backend whose CLI was **not** detected, prompt them with its install command from [skill.deps.json](./skill.deps.json) and offer to: retry detection / pick the other backend / skip notes for now.
 
 4. **Finish setup for the chosen backend** (discover vault, or run `ntn login` + create the Learning page) per its backend file.
 

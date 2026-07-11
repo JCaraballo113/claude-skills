@@ -58,7 +58,5 @@ _Avoid_: calling a tooltip or a tour a bridge — those document a gulf, they do
 
 ## Rejected framings
 
-- **"Confusing" / "clunky" / "unintuitive" / "smooth"**: unfalsifiable mood words. Name the gulf (execution or evaluation) and the missing element (signifier, feedback, model match).
 - **Aesthetics _instead of_ gulf-closing**: visual polish alone doesn't close a gulf — this skill's lens is execution and evaluation gulfs, not styling. But polish isn't optional either: every bridge is designed in Pencil and held to `impeccable`'s bar (both required). Close the gulf *and* ship it polished — don't mistake a pretty screen for a bridged one.
-- **"Just add a tooltip / onboarding tour / help text"**: a label over a gulf, not a **Bridge**. Documentation explains the gulf; a bridge removes it.
 - **"More features"**: each new **affordance** widens the **Gulf of Execution** unless it's signified and fits the **conceptual model**. Adding capability is not the same as improving experience.

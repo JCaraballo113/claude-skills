@@ -5,7 +5,7 @@ description: Read-only overview of review comment status on the current branch's
 
 # PR Review Status
 
-Query the open PR for the current branch and show where each review comment stands — no edits, no posts, no commits. This is the read-before-write companion to `triage-pr-comments`.
+Query the open PR for the current branch and show where each review comment stands. This is the read-before-write companion to `triage-pr-comments`.
 
 ## Prerequisites
 
@@ -78,7 +78,7 @@ Deferred / dismissed (0)
 
 For each entry, show: reviewer login · file:line · one-line summary of the claim (first sentence of the comment body, stripped of markdown). Keep it tight — if the body is long, truncate to ~100 chars.
 
-If the user wants detail on one entry, drill in: show the full comment body, the reply chain, and which file:line it touches. Don't edit or post anything.
+If the user wants detail on one entry, drill in: show the full comment body, the reply chain, and which file:line it touches.
 
 ### 5. Suggest next steps
 
