@@ -43,7 +43,7 @@ Skills live under [`skills/`](./skills). Once the plugin is installed they're in
 
 | Skill | Description |
 |---|---|
-| [add-agent-skill](./skills/add-agent-skill/SKILL.md) | Scaffold a new agent skill in this repo. Interviews for name and triggers, writes the frontmatter + outline, and suggests a commit. Use when starting a new skill. Named `agent-skill` to avoid collision with a potential future Anthropic-shipped `add-skill`. |
+| [add-agent-skill](./skills/add-agent-skill/SKILL.md) | Scaffold a new agent skill anywhere — global `~/.claude/skills`, project `.claude/skills`, or your own skills repo/plugin. Interviews for purpose, triggers, and name; writes frontmatter + outline (+ `skill.deps.json` when needed); never commits or pushes. Named `agent-skill` to avoid collision with a potential future Anthropic-shipped `add-skill`. |
 | [agent-rules](./skills/agent-rules/SKILL.md) | Encode working conventions as one rule file per concern in `.claude/rules/` — testing (happy/negative path), migrations, design-system (atomic vocabulary + content extremes), code-review, finding-unknowns — generalized to the project, any ecosystem. |
 | [design-tooling](./skills/design-tooling/SKILL.md) | Design-first frontend tooling: every UI designed in Pencil (`.pen` via the MCP) with `impeccable` governing quality; design precedes implementation. Deps declared in its `skill.deps.json`. |
 | [finding-unknowns](./skills/finding-unknowns/SKILL.md) | Classifies your unknowns about a piece of work into four quadrants (known/unknown × knowns/unknowns) and runs the right technique per quadrant — verify, interview, prototype/reference, or blindspot pass — with phase-specific exits. |
