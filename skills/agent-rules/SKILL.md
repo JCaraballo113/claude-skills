@@ -84,6 +84,14 @@ The rules:
   `prefers-reduced-motion` variant (color or opacity change); and
   high-stakes moments — payments, destructive actions, errors involving
   loss — get calm, plain feedback, no playfulness.
+
+  Theming: surfaces follow the active theme — light theme means light
+  surfaces, dark theme dark ones, never an inverted, opposite-theme
+  fill. Floating elements (tooltips, toasts, popovers, menus) are
+  `$surface` with a `$border` stroke and an ink shadow. Every color on
+  a themed element resolves through a theme-bound variable; a one-off
+  token that flips against the theme axis is the tell that this rule is
+  about to be broken.
 - **`code-review.md`**: after any code change, run `/code-review` and fix
   findings **before** committing — only when the code-review skill
   passes the installed-check; if it doesn't, commit without improvising
