@@ -1,6 +1,6 @@
 ---
 name: agent-rules
-description: Encode working conventions as one rule file per concern in .claude/rules/ — testing (TDD, happy/negative path, coverage as discovery), migrations, design-system (atomic design vocabulary, content extremes, motion), code-review, finding-unknowns — generalized to the project at hand, any ecosystem. Use when the user says "setup agent rules", "encode the agent rules", or via setup-tooling.
+description: Encode working conventions as one rule file per concern in .claude/rules/ — testing (TDD, happy/negative path, coverage as discovery), migrations, design-system (atomic design vocabulary, content extremes, motion), code-review, sub-agents (model tiering), finding-unknowns — generalized to the project at hand, any ecosystem. Use when the user says "setup agent rules", "encode the agent rules", or via setup-tooling.
 ---
 
 # Agent Rules
@@ -114,6 +114,25 @@ The rules:
   are exempt; when in doubt, review anyway. The point: the working
   branch's history is what reviewers read, so findings get fixed
   pre-commit instead of surfacing in PR review.
+- **`sub-agents.md`** (every project): match the sub-agent's model to the
+  task; never default every spawn to the session model — Opus is the
+  expensive default, reserved for where judgment pays off. **Sonnet (or
+  cheaper) for mechanical, well-specified work** with one right answer and
+  a clear spec: lint remediation (`id-length`, `no-magic-numbers`, other
+  cap fixes with an obvious extraction), mechanical renames,
+  straightforward test scaffolding, doc/format passes, search-and-collate.
+  **Opus for judgment-heavy work:** structural refactors of long or
+  complex files (splitting modules along seams, decomposing
+  high-complexity functions without changing behavior), architecture and
+  interface design, ambiguous or underspecified tasks, security-sensitive
+  or money-moving code, and cross-cutting changes whose blast radius needs
+  weighing. The spawning agent is the reviewer: when a cheaper-model agent
+  returns, review its diff before committing — use `/code-review` for
+  non-trivial batches (see `.claude/rules/code-review.md`). Cheaper
+  execution plus an Opus review gate beats running everything on Opus. Set
+  the model explicitly on each spawn (`model:` on the Agent tool, or
+  `model`/`effort` per stage in a Workflow) rather than relying on
+  inheritance.
 - **`finding-unknowns.md`**: before implementing a non-trivial feature —
   new domain, schema change, unfamiliar area of the codebase — run
   `/john-superpowers:finding-unknowns` to map the unknowns (four-quadrant
