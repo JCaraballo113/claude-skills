@@ -51,8 +51,9 @@ pnpm is the package manager — not npm, not yarn, in the repo and in CI.
 minimumReleaseAge: 1440   # a version must be ≥1 day old to install
 ```
 
-- Scripts: `dev`, `build`, `test` (`vitest run`), `test:watch`, `lint`
-  (`eslint --max-warnings 0`).
+- Scripts: `dev`, `build`, `test` (`vitest run`), `test:watch`,
+  `test:coverage` (`vitest run --coverage`, via `@vitest/coverage-v8`),
+  `lint` (`eslint --max-warnings 0`).
 
 ## Database (when the interview says yes)
 

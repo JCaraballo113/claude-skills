@@ -1,6 +1,6 @@
 ---
 name: agent-rules
-description: Encode working conventions as one rule file per concern in .claude/rules/ — testing (happy/negative path), migrations, design-system (atomic design vocabulary, content extremes, motion), code-review, finding-unknowns — generalized to the project at hand, any ecosystem. Use when the user says "setup agent rules", "encode the agent rules", or via setup-tooling.
+description: Encode working conventions as one rule file per concern in .claude/rules/ — testing (TDD, happy/negative path, coverage as discovery), migrations, design-system (atomic design vocabulary, content extremes, motion), code-review, finding-unknowns — generalized to the project at hand, any ecosystem. Use when the user says "setup agent rules", "encode the agent rules", or via setup-tooling.
 ---
 
 # Agent Rules
@@ -10,7 +10,7 @@ Encode the working conventions as one rule file per concern in
 session. Write them generalized to the project at hand (its actual
 domains, scripts, and stack), never with another app's specifics.
 
-Two rules gate on a skill being installed. The **installed-check** —
+Three rules gate on a skill being installed. The **installed-check** —
 inline this wording into each generated rule that uses it, so the rule
 stands alone in the target repo: *the skill counts as installed when it
 appears in the available-skills list in any scope — global, project, or
@@ -20,7 +20,11 @@ filesystem paths.*
 
 The rules:
 
-- **`testing.md`** (every project): every test file (Vitest in JS; the
+- **`testing.md`** (every project): features develop test-first (red → green → refactor)
+  via the `tdd` skill; the generated rule tells the agent that when the
+  skill fails the installed-check, it prompts the user to install it
+  (`npx skills add https://github.com/mattpocock/skills --skill tdd`)
+  rather than improvising the loop. Every test file (Vitest in JS; the
   stack's runner elsewhere) groups specs under
   `describe("Happy path")` and `describe("Negative path")`; when one file
   covers several surfaces, nest the pair inside each surface's describe.
@@ -31,8 +35,19 @@ The rules:
   internals. A surface with no negative specs is a smell. Spec files
   mirror the domain seams of the source: group into `tests/<domain>/`
   folders as domains accumulate — never one flat pile; a lone spec may
-  sit flat until its domain grows a second file. Shared infrastructure
-  lives in `tests/helpers/`.
+  sit flat until its domain grows a second file. When installing into a
+  repo that already has flat spec files, grandfather them by name in the
+  rule: new specs go in domain folders; legacy files move
+  opportunistically when touched, never in bulk. Shared infrastructure
+  lives in `tests/helpers/`. Coverage: non-trivial features land with
+  tests covering their happy and negative paths — not incidental line
+  coverage. Measure with a `test:coverage` script (in JS:
+  `vitest run --coverage`); before calling feature work done, check that
+  the files added or changed show up covered — an important module at
+  ~0% is a gap to close, not a statistic to report. Coverage is a
+  discovery tool, not a gate: there is no numeric threshold to game, and
+  untestable-as-written code that blocks coverage gets refactored, not
+  excluded.
 - **`migrations.md`** (only when the project has a DB): local dev is
   push-based; deployed environments are migration-based (in JS:
   Drizzle's `db:push` / `db:generate` / `db:migrate`). Generate the
@@ -109,3 +124,7 @@ The rules:
   with an obvious cause are exempt. The point: unknowns get surfaced
   while they're cheap — during planning, not after implementation comes
   back wrong.
+
+When installing these rules, if a skill in
+[skill.deps.json](./skill.deps.json) isn't installed, prompt the user to
+run its install command first.
