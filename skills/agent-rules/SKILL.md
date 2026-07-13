@@ -23,8 +23,8 @@ The rules:
 - **`testing.md`** (every project): features develop test-first (red → green → refactor)
   via the `tdd` skill; the generated rule tells the agent that when the
   skill fails the installed-check, it prompts the user to install it
-  (`npx skills add https://github.com/mattpocock/skills --skill tdd`)
-  rather than improvising the loop. Every test file (Vitest in JS; the
+  (command in [skill.deps.json](./skill.deps.json)) rather than improvising
+  the loop. Every test file (Vitest in JS; the
   stack's runner elsewhere) groups specs under
   `describe("Happy path")` and `describe("Negative path")`; when one file
   covers several surfaces, nest the pair inside each surface's describe.
