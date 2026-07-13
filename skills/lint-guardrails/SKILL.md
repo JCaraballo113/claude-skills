@@ -19,6 +19,10 @@ ecosystem-agnostic; implementations live in per-ecosystem support files.
 - Comments are banned; knowledge lives in docs, names, and test titles.
 - The config is **protected**: a PreToolUse deny hook blocks agent edits
   to the lint config. Timing and caveats live with the implementation.
+- **Enforced at a commit gate, not per edit** — the guardrails only bite
+  if lint runs before code lands: wire it into a git-hook gate backed by
+  CI (the un-bypassable backstop), never a per-edit agent hook that fires
+  mid-refactor. The wiring is ecosystem-specific.
 - Vendored/generated code, tests, scripts, and root config files get
   scoped exemptions — correctness rules stay on everywhere.
 

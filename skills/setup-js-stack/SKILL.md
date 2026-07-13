@@ -1,6 +1,6 @@
 ---
 name: setup-js-stack
-description: The JS/TS stack module for setup-tooling — TanStack Start (or Vite for SPAs), TanStack Query/Form, Zustand for client state when needed, GSAP for motion/animation, Hono for pure backends, Drizzle + Docker/Supabase Postgres, Zod, Tailwind, shadcn, Vitest, GitHub Actions CI, all on pnpm with the 1-day package-age guard. Use when the user says "setup js tooling", "setup the js stack", or bootstraps a fresh JS/TS repo — usually composed by setup-tooling.
+description: The JS/TS stack module for setup-tooling — TanStack Start (or Vite for SPAs), TanStack Query/Form, Zustand for client state when needed, GSAP for motion/animation, Hono for pure backends, Drizzle + Docker/Supabase Postgres, Zod, Tailwind, shadcn, Vitest, tsc typecheck and lefthook commit gates, GitHub Actions CI, all on pnpm with the 1-day package-age guard. Use when the user says "setup js tooling", "setup the js stack", or bootstraps a fresh JS/TS repo — usually composed by setup-tooling.
 ---
 
 # Setup JS Stack
@@ -53,7 +53,8 @@ minimumReleaseAge: 1440   # a version must be ≥1 day old to install
 
 - Scripts: `dev`, `build`, `test` (`vitest run`), `test:watch`,
   `test:coverage` (`vitest run --coverage`, via `@vitest/coverage-v8`),
-  `lint` (`eslint --max-warnings 0`).
+  `lint` (`eslint --max-warnings 0`), `typecheck` (`tsc --noEmit`), and
+  `prepare` (`lefthook install`).
 
 ## Database (when the interview says yes)
 
@@ -68,12 +69,28 @@ minimumReleaseAge: 1440   # a version must be ≥1 day old to install
   container and pushes the schema — tests never touch a real DB.
 - Secrets never in the repo: `.env.example` documents variables only.
 
+## Commit gate via lefthook (every project)
+
+`lefthook` wires the lint/typecheck/test scripts into git so they gate the
+branch before code lands (`lefthook` dev dep; the `prepare` script above
+installs its hooks on `pnpm install`). Committed `lefthook.yml`:
+
+- **pre-commit** — `eslint --max-warnings 0` on staged `*.{ts,tsx,js,jsx}`
+  only: fast, keeps commits snappy.
+- **pre-push** — `pnpm typecheck` (`tsc --noEmit`), project-wide and
+  slower, so it runs once per push rather than per commit. Add `pnpm test`
+  here too to gate tests locally, not only in CI.
+
+It's a tripwire, not a sandbox — `git commit --no-verify` bypasses it — so
+the same checks run in CI, the backstop that can't be skipped: a local
+bypass still fails the PR.
+
 ## CI via GitHub Actions (every project)
 
-`.github/workflows/ci.yml`: `lint` and `test` jobs on push to the working
-branches and PRs to main — `pnpm/action-setup` + `setup-node` with
-`cache: pnpm`, `pnpm install --frozen-lockfile`, then `pnpm lint` /
-`pnpm test`. If the project has a DB, give the test job a
+`.github/workflows/ci.yml`: `lint`, `typecheck`, and `test` jobs on push to
+the working branches and PRs to main — `pnpm/action-setup` + `setup-node`
+with `cache: pnpm`, `pnpm install --frozen-lockfile`, then `pnpm lint` /
+`pnpm typecheck` / `pnpm test`. If the project has a DB, give the test job a
 `supabase/postgres` service on the same port the compose file uses, with a
 `pg_isready` healthcheck.
 

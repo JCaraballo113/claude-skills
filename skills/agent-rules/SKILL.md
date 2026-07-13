@@ -107,6 +107,21 @@ The rules:
   a themed element resolves through a theme-bound variable; a one-off
   token that flips against the theme axis is the tell that this rule is
   about to be broken.
+
+  Responsive: every screen and view ships **both** desktop and mobile
+  treatments — a desktop-only mock is unfinished, because mobile is where
+  the layout actually breaks (a header row that fits at desktop width
+  collides at phone width; a table must scroll or restack; actions move
+  into a menu) and the missing treatment gets improvised in code. Where
+  the layout diverges structurally — tables, toolbars, multi-column
+  rows — the mobile
+  treatment is its own component (a `<Screen> Mobile` companion), not a
+  narrowed desktop frame; where a card only reflows, a phone-width
+  instance suffices, but it is still built and exercised. Every content
+  and state extreme above gets re-checked at phone width, where they
+  break first. This axis composes with theming — viewport × theme is four
+  real renders (desktop and mobile, each in light and dark), never
+  assumed.
 - **`code-review.md`**: after any code change, run `/code-review` and fix
   findings **before** committing — only when the code-review skill
   passes the installed-check; if it doesn't, commit without improvising
