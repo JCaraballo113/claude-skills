@@ -10,7 +10,7 @@ Encode the working conventions as one rule file per concern in
 session. Write them generalized to the project at hand (its actual
 domains, scripts, and stack), never with another app's specifics.
 
-Three rules gate on a skill being installed. The **installed-check** —
+Four rules gate on a skill being installed. The **installed-check** —
 inline this wording into each generated rule that uses it, so the rule
 stands alone in the target repo: *the skill counts as installed when it
 appears in the available-skills list in any scope — global, project, or
@@ -56,8 +56,16 @@ The rules:
   silently never reaches deployed environments. Never edit a committed
   migration; add a new one. The deploy pipeline runs the migrations
   against that environment's database before building.
-- **`design-system.md`** (frontend projects only): atomic design's five
-  levels — atoms, molecules, organisms, templates, pages — are the shared
+- **`design-system.md`** (frontend projects only): invoke `/impeccable`
+  whenever designing, redesigning, auditing, or polishing any UI — it owns
+  the visual and interaction quality bar, and everything below is the
+  repo's structural layer beneath it. When `/impeccable` fails the
+  installed-check, prompt the user to install it (`npx skills add
+  https://github.com/pbakaus/impeccable --skill impeccable`) rather than
+  improvising the bar.
+
+  Atomic design's five levels — atoms, molecules, organisms, templates,
+  pages — are the shared
   vocabulary for component **granularity**, used in design conversations,
   critiques, and PR discussion. Never as folder names: folders stay
   domain-based, and components are named for what they are (`SearchForm`,

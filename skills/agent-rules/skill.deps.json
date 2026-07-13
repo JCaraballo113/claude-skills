@@ -1,3 +1,4 @@
 {
-  "tdd": "npx skills add https://github.com/mattpocock/skills --skill tdd"
+  "tdd": "npx skills add https://github.com/mattpocock/skills --skill tdd",
+  "impeccable": "npx skills add https://github.com/pbakaus/impeccable --skill impeccable"
 }
