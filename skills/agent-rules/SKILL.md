@@ -59,10 +59,8 @@ The rules:
 - **`design-system.md`** (frontend projects only): invoke `/impeccable`
   whenever designing, redesigning, auditing, or polishing any UI — it owns
   the visual and interaction quality bar, and everything below is the
-  repo's structural layer beneath it. When `/impeccable` fails the
-  installed-check, prompt the user to install it (`npx skills add
-  https://github.com/pbakaus/impeccable --skill impeccable`) rather than
-  improvising the bar.
+  repo's structural layer beneath it. Gated on the installed-check —
+  install command in [skill.deps.json](./skill.deps.json).
 
   Atomic design's five levels — atoms, molecules, organisms, templates,
   pages — are the shared
