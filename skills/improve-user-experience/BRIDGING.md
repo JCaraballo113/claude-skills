@@ -35,6 +35,6 @@ When a feedback moment can carry personality — an acknowledgment, a celebratio
 ## Bridging strategy: remove, don't paper over
 
 - A bridge **changes the design** so the gulf is gone. If after your change the user still has to read an explanation to cross it, you papered over it — the gulf is still there.
-- **Cover every state the bridge touches.** A bridge that only works in the happy path opens a new evaluation gulf in the error, empty, and loading states. Design all of them (this is where layering `impeccable` over the Pencil design earns its keep).
+- **Cover every state the bridge touches.** A bridge that only works in the happy path opens a new evaluation gulf everywhere else — design every state it reaches, not just the success case (this is where layering `impeccable` over the Pencil design earns its keep).
 - **Don't widen one gulf to close another.** Adding an **affordance** to close an execution gulf can clutter the surface and raise the cost of *every* Job. Prefer bridges that subtract.
 - **The test survives the redesign.** The win is measured against the **hesitation test**: walk the bridged flow as a first-timer who can't ask anyone, and confirm the pause is gone — not merely explained.

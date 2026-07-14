@@ -14,7 +14,7 @@ Before spawning sub-agents, write a user-facing framing of the chosen candidate:
 
 - The **Job** the user is trying to do, and exactly where the gulf opens in the flow.
 - Which gulf it is (execution / evaluation) and what's missing (signifier, feedback, model match).
-- The constraints any bridge must respect — the states it must cover (empty, loading, error, success), the surrounding flow it can't break, the **conceptual model** it must match.
+- The constraints any bridge must respect — the states it must cover (empty, loading, error, success, the **precondition already satisfied**, and the **action in flight**), the surrounding flow it can't break, the **conceptual model** it must match.
 - A reference frame: a `get_screenshot` of the current designed (or built) screen, so the user sees the "before" while the variants are designed.
 
 Show this to the user, then proceed to Step 2. The user reads and thinks while the sub-agents work in parallel.
@@ -29,6 +29,8 @@ Spawn 3+ sub-agents in parallel using the Agent tool. Each produces a **radicall
 - Agent 4 (if applicable): **Re-model** — restructure so the action sits where the user's existing conceptual model already expects it, even if that means moving it across the flow.
 
 Give each sub-agent a self-contained brief: the gulf framing, the file/frame paths in the `.pen`, the states to cover, and both the [LANGUAGE.md](LANGUAGE.md) vocabulary and the project's `CONTEXT.md` domain nouns, so every variant names things consistently.
+
+To keep concurrent edits to the one `.pen` from colliding, **pre-create one empty artboard per agent at known, non-overlapping coordinates** and require each agent to build only inside its assigned frame — no `FindEmptySpace`, no inserts at the document root. When that isolation isn't practical, design the variants sequentially yourself rather than risk a spatial race.
 
 Each sub-agent outputs:
 
@@ -48,4 +50,4 @@ Present the variants sequentially — show each one's screenshots so the user ab
 
 After comparing, give your own recommendation: which bridge is strongest and why. If elements combine well — Agent 1's removal with Agent 3's feedback on the residual step — propose the hybrid and design it. Be opinionated; the user wants a strong read, not a gallery.
 
-The chosen design is the deliverable. It becomes the spec whatever implements designs in the project builds from — implementation is out of this skill's scope.
+The chosen design is the deliverable, together with a **design decision record** ([DECISION-RECORD.md](DECISION-RECORD.md)): the comparison you just made — the chosen bridge, and the runners-up with the reason each lost — is exactly its _Considered options_. It becomes the spec whatever implements designs in the project builds from — implementation is out of this skill's scope.
