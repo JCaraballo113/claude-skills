@@ -1,6 +1,6 @@
 ---
 name: lint-guardrails
-description: AI-guardrail linting — size/complexity caps that force extraction over sprawl, no comments, named constants, everything an error, and the config protected from agent edits by a deny hook. Ecosystem-agnostic philosophy with per-ecosystem implementations (ESLint for JS/TS today). Standalone-safe on existing repos. Use when the user says "setup linting", "set up the lint guardrails", "add lint guardrails", or via setup-tooling.
+description: AI-guardrail linting — size/complexity caps that force extraction over sprawl, no comments, named constants, everything an error, and the config protected from agent edits by a deny hook. Ecosystem-agnostic philosophy with per-ecosystem implementations (ESLint for JS/TS today). Standalone-safe on existing repos. Use when the user says "setup linting", "add lint guardrails", or via setup-tooling.
 ---
 
 # Lint Guardrails
