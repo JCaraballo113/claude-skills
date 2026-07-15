@@ -24,8 +24,9 @@ The rules:
   via the `tdd` skill; the generated rule tells the agent that when the
   skill fails the installed-check, it prompts the user to install it
   (command in [skill.deps.json](./skill.deps.json)) rather than improvising
-  the loop. Every test file (Vitest in JS; the
-  stack's runner elsewhere) groups specs under
+  the loop. Every test file (Vitest in web JS; jest-expo +
+  @testing-library/react-native in Expo/React Native; the stack's runner
+  elsewhere) groups specs under
   `describe("Happy path")` and `describe("Negative path")`; when one file
   covers several surfaces, nest the pair inside each surface's describe.
   Happy path = the documented, intended behavior. Negative path =
@@ -35,7 +36,10 @@ The rules:
   internals. A surface with no negative specs is a smell. Spec files
   mirror the domain seams of the source: group into `tests/<domain>/`
   folders as domains accumulate — never one flat pile; a lone spec may
-  sit flat until its domain grows a second file. When installing into a
+  sit flat until its domain grows a second file. On Expo/React Native,
+  follow the framework's colocation instead — the spec sits beside its
+  source (`foo.test.ts` next to `foo.ts`); the happy/negative grouping is
+  unchanged. When installing into a
   repo that already has flat spec files, grandfather them by name in the
   rule: new specs go in domain folders; legacy files move
   opportunistically when touched, never in bulk. Shared infrastructure
@@ -99,8 +103,9 @@ The rules:
   code-on-canvas Script nodes
   (https://docs.pencil.dev/core-concepts/code-on-canvas) — generated
   from data, not hand-duplicated layers, converting to editable layers
-  only when a mock needs hand-tuning. Motion: one animation library per project (GSAP in JS
-  projects), added when the UI first animates; feedback animation
+  only when a mock needs hand-tuning. Motion: one animation library per project (GSAP in web JS
+  projects; react-native-reanimated in Expo/React Native), added when the
+  UI first animates; feedback animation
   budgets 100–200ms; every animated moment ships a
   `prefers-reduced-motion` variant (color or opacity change); and
   high-stakes moments — payments, destructive actions, errors involving
@@ -127,7 +132,9 @@ The rules:
   and state extreme above gets re-checked at phone width, where they
   break first. This axis composes with theming — viewport × theme is four
   real renders (desktop and mobile, each in light and dark), never
-  assumed.
+  assumed. On Expo/React Native the axis is platform, not viewport — iOS
+  and Android (plus web via RN-web where enabled) across phone and tablet
+  size classes; platform × theme is the render matrix.
 - **`code-review.md`**: after any code change, run `/code-review` and fix
   findings **before** committing — only when the code-review skill
   passes the installed-check; if it doesn't, commit without improvising

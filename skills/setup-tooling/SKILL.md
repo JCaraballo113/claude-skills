@@ -1,6 +1,6 @@
 ---
 name: setup-tooling
-description: Bootstrap a project with my preferred tooling. Drives an intent interview first (ecosystem, project type, frontend, database, existing code), then composes the matching modules — a per-ecosystem stack (JS/TS today via setup-js-stack), lint-guardrails, design-tooling, and agent-rules. Use when the user says "setup tooling", "bootstrap this project", "scaffold my stack", or starts a fresh repo.
+description: Bootstrap a project with my preferred tooling. Drives an intent interview first (ecosystem, platform, project type, frontend, database, existing code), then composes the matching modules — a per-platform stack (JS/TS web via setup-js-stack, Expo/React Native mobile via setup-expo-stack), lint-guardrails, design-tooling, and agent-rules. Use when the user says "setup tooling", "bootstrap this project", "scaffold my stack", "set up a mobile/expo app", or starts a fresh repo.
 ---
 
 # Setup Tooling
@@ -13,22 +13,29 @@ before it.
 
 Ask up front (AskUserQuestion works well); don't guess:
 
-1. **Ecosystem** — JS/TS is the only stack module today. For anything
-   else, say so, apply only the ecosystem-agnostic modules below, and
-   offer to draft a `setup-<lang>-stack` module as a follow-up.
-2. **Project type** — full-stack web app, SPA, backend/API, library,
-   CLI. The stack module maps type → scaffold.
-3. **Frontend?** — decides design tooling.
-4. **Database?** — decides the DB portion of the stack module.
-5. **Existing code?** — never re-scaffold over existing work; layer the
+1. **Ecosystem** — JS/TS is the only ecosystem with stack modules today.
+   For anything else, say so, apply only the ecosystem-agnostic modules
+   below, and offer to draft a `setup-<lang>-stack` module as a follow-up.
+2. **Platform** — web, mobile (Expo/React Native), or both. Web →
+   `setup-js-stack`; mobile → `setup-expo-stack`; both → compose the two
+   (a web+mobile monorepo).
+3. **Project type** — for web: full-stack app, SPA, backend/API, library,
+   CLI; for mobile: an Expo app (± API routes/backend). The stack module
+   maps type → scaffold.
+4. **Frontend?** — decides design tooling. Mobile apps always have one.
+5. **Database?** — decides the DB portion of the stack module (on mobile,
+   the backend-per-project decision).
+6. **Existing code?** — never re-scaffold over existing work; layer the
    missing pieces instead.
 
 ## 2. Compose modules
 
 In order, skipping what intent ruled out:
 
-1. `/john-superpowers:setup-js-stack` — the ecosystem stack (framework,
-   package-manager baseline, database, CI). JS/TS projects only.
+1. The stack module for the platform — `/john-superpowers:setup-js-stack`
+   (web) and/or `/john-superpowers:setup-expo-stack` (mobile); both for a
+   web+mobile monorepo. Framework, package-manager baseline, database, CI.
+   JS/TS only.
 2. `/john-superpowers:lint-guardrails` — every project, any ecosystem.
 3. `/john-superpowers:design-tooling` — frontend projects only.
 4. `/john-superpowers:agent-rules` — every project.
