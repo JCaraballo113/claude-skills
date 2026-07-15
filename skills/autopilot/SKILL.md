@@ -24,7 +24,7 @@ Hold these every iteration — they are what keep an unattended run predictable:
   and report; the agents write the source.
 - **A fresh agent per item, in its own worktree.** Each item runs in a throwaway git worktree on
   its own branch, cut from the target tip — fresh context, isolated tree, and the isolated copy
-  the `verify` harness wants (its own dedicated DBs / ports).
+  runtime verification wants (its own app instance, DBs, or ports).
 - **The agent commits and notes; the orchestrator integrates.** In its worktree the agent commits
   by **pathspec** (only the files it changed) and attaches a **git note** (`refs/notes/autopilot`)
   with its label and reviewer notes. Nothing reaches the target branch until the orchestrator has
@@ -75,7 +75,7 @@ For each item in order:
    references the issue and the step-2 map **by path**, names the branch to commit on, and its
    **suggested skills** section runs `/autopilot-implement` (implement → TDD at the seams →
    typecheck + tests → `/code-review`, then commit by pathspec and attach the git note) plus, for
-   a user-visible change, the project's `verify` recipe. For a **front-end item**, name the design
+   a user-visible change, a runtime check against the running app (however the project runs it). For a **front-end item**, name the design
    board(s) and states and make design parity a completion gate. The agent returns a **terse**
    result — branch, commit, files, test/verify status — its prose living in the note.
 3. **Validate the item branch.** Confirm the commit touches only the item's files; re-run its key
