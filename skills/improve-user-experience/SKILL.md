@@ -30,7 +30,7 @@ Use these terms exactly in every suggestion. Consistent language is the point �
 - **Friction** — effort, decisions, waiting, or steps the user spends that don't advance the Job. The quantity being reduced.
 - **Bridge** — a design change that closes a gulf so the user no longer crosses it themselves. The verb of this skill.
 
-This skill is _informed_ by the project's intended experience. `EXPERIENCE.md` is a **glossary of the experience** — Jobs, flows, and feels — that **mirrors `CONTEXT.md`** (which names the domain): the same tight `**Term**:` → one-or-two-sentence definition → optional `_Avoid_` entries, no decisions and no implementation. The skill finds where the built experience falls short of that intended one — and never edits `EXPERIENCE.md` without explicit human approval: it is human-owned, the source of truth code conforms to, not the reverse. **Decisions** — which bridge was chosen, what was set aside and why — never go in `EXPERIENCE.md`; they get their own **design decision record** ([DECISION-RECORD.md](DECISION-RECORD.md)).
+This skill is _informed_ by the project's intended experience. `EXPERIENCE.md` is the human-owned **glossary of the experience** — Jobs, flows, and feels — that mirrors `CONTEXT.md` (which names the domain). It is the bar: the skill finds where the built experience falls short of the intended one, and never edits `EXPERIENCE.md` without explicit human approval — it is the source of truth code conforms to, not the reverse. What graduates into `EXPERIENCE.md`, into `CONTEXT.md`, or into a **design decision record** ([DECISION-RECORD.md](DECISION-RECORD.md)) — and in what format — is spelled out in phase 3's side effects.
 
 ## Process
 

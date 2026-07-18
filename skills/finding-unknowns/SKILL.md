@@ -28,6 +28,6 @@ Present a short four-quadrant map, then run the technique that fits each:
 
 - **Before** — write an implementation plan leading with the decisions most likely to change (data models, type interfaces, anything user-facing); mechanical work at the bottom. Suggest a fresh session with plan + prototypes as inputs.
 - **During** — keep `implementation-notes.md`: on a forced deviation, pick the conservative option, log it under "Deviations", keep going; review deviations with the user afterward — each is a discovered unknown.
-- **After** — run `/john-superpowers:teach-me` on the change, then offer to package plan + notes into a pitch doc for reviewer buy-in.
+- **After** — offer to package plan + notes into a pitch doc for reviewer buy-in.
 
 If a skill in [skill.deps.json](./skill.deps.json) isn't installed, prompt the user to run its install command first.

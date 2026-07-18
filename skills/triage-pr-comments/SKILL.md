@@ -166,7 +166,7 @@ Post all approved replies in parallel (multiple Bash calls in one message). Repo
 
 ## Notes
 
-- The "draft, never auto-post" rule in step 8 is the most important rule in this skill. If you're unsure whether a reply was approved, it wasn't — go back and ask.
+- If you're unsure whether a reply was approved, it wasn't — go back and ask.
 - Needs `gh`, `git`, and `jq`; if one is missing, prompt the user with its install command from [skill.deps.json](./skill.deps.json).
 - If the PR repo moved (GitHub redirects during push), the old `owner/repo` in git remote still works for `gh api`, but prefer the new location when constructing URLs.
 - CodeRabbit comments include a lot of collapsed `<details>` blocks — the meaningful claim is usually in the first paragraph. Skim the rest only if you need the suggested diff.
