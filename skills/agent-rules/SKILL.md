@@ -1,6 +1,6 @@
 ---
 name: agent-rules
-description: Encode working conventions as one rule file per concern in .claude/rules/ — testing (TDD, happy/negative path, coverage as discovery), migrations, design-system (atomic design vocabulary, content extremes, motion), code-review, subagent-model-tiering (advisory escalation, parallel safety), improve-the-territory (leave touched code better than found), finding-unknowns — generalized to the project at hand, any ecosystem. Use when the user says "setup agent rules", "encode the agent rules", or invokes setup-tooling.
+description: Encode working conventions as one rule file per concern in .claude/rules/ — testing (TDD, happy/negative path, coverage as discovery), migrations, design-system (atomic design vocabulary, content extremes, motion), code-review, subagent-model-tiering (advisory escalation, parallel safety), improve-the-territory (leave touched code better than found), finding-unknowns, agent-summaries (debrief, not changelog) — generalized to the project at hand, any ecosystem. Use when the user says "setup agent rules", "encode the agent rules", or invokes setup-tooling.
 ---
 
 # Agent Rules
@@ -45,6 +45,10 @@ The rules:
   patterns better than found.
 - [`finding-unknowns.md`](./rules/finding-unknowns.md) (every project)
   — map the unknowns before non-trivial features.
+- [`agent-summaries.md`](./rules/agent-summaries.md) (every project) —
+  reports to a human are debriefs, not changelogs: outcome first,
+  effects over internals, "done" / "needs you" / "caveats" kept
+  separate.
 
 When installing these rules, if a skill in
 [skill.deps.json](./skill.deps.json) isn't installed, prompt the user to
