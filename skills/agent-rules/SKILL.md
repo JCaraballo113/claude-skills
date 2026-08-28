@@ -1,6 +1,6 @@
 ---
 name: agent-rules
-description: Encode working conventions as one rule file per concern in .claude/rules/ — testing (TDD, happy/negative path, coverage as discovery), migrations, design-system (atomic design vocabulary, content extremes, motion), code-review, code-style (a judgment-level CODE-STYLE.md canon, gated by a five-point style-vs-decision test), subagent-model-tiering (advisory escalation, parallel safety), improve-the-territory (leave touched code better than found), finding-unknowns, agent-summaries (debrief, not changelog) — generalized to the project at hand, any ecosystem. Use when the user says "setup agent rules", "encode the agent rules", or invokes setup-tooling.
+description: Encode working conventions as one rule file per concern in .claude/rules/ — testing (TDD, happy/negative path, coverage as discovery), migrations, design-system (atomic design vocabulary, content extremes, motion), code-review, coding-standard-updates (a judgment-level CODING_STANDARDS.md canon, gated by a five-point style-vs-decision test, every entry standing on its own), subagent-model-tiering (advisory escalation, parallel safety), improve-the-territory (leave touched code better than found), finding-unknowns, agent-summaries (debrief, not changelog) — generalized to the project at hand, any ecosystem. Use when the user says "setup agent rules", "encode the agent rules", or invokes setup-tooling.
 ---
 
 # Agent Rules
@@ -36,11 +36,12 @@ The rules:
   matrix.
 - [`code-review.md`](./rules/code-review.md) (every project) — run
   `/code-review` and fix findings before every commit.
-- [`code-style.md`](./rules/code-style.md) (every project) — a root
-  `CODE-STYLE.md` seeded from the project's own conventions, plus the gate
-  it changes through: propose first, five-point test (general ·
-  expression-not-decision · machine-can't-judge · outlives-implementation ·
-  refusable), entries migrate out, written with `writing-for-agents`.
+- [`coding-standard-updates.md`](./rules/coding-standard-updates.md) (every
+  project) — a root `CODING_STANDARDS.md` seeded from the project's own
+  conventions, plus the gate it changes through: propose first, five-point
+  test (general · expression-not-decision · machine-can't-judge ·
+  outlives-implementation · refusable), every entry stands on its own (no
+  ADR pointers), entries migrate out, written with `writing-for-agents`.
 - [`subagent-model-tiering.md`](./rules/subagent-model-tiering.md)
   (every project) — model tiering (cheap / mid / heavy-hitter) by role,
   heavy tier opt-in, advisory escalation, spawner-as-reviewer, parallel
@@ -61,5 +62,5 @@ run its install command first.
 
 Done when every applicable rule exists in `.claude/rules/`, written from
 its template and generalized to this project, every skill-gated rule
-carries the installed-check wording inline, and `CODE-STYLE.md` exists at
+carries the installed-check wording inline, and `CODING_STANDARDS.md` exists at
 the root with its header and every seeded section approved by the human.
